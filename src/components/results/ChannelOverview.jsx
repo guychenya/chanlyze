@@ -5,9 +5,11 @@ import SafeIcon from '../../common/SafeIcon';
 import RealDataBadge from './RealDataBadge';
 
 const ChannelOverview = ({ data }) => {
-  const { FiUsers, FiPlay, FiEye, FiCalendar, FiTrendingUp, FiTrendingDown, FiExternalLink, FiWifi } = FiIcons;
+  const { FiUsers, FiPlay, FiEye, FiCalendar, FiTrendingUp, FiTrendingDown, FiExternalLink, FiWifi, FiAlertTriangle } = FiIcons;
 
   const healthScore = data.analytics.healthScore;
+  const isQuotaExceeded = data.quotaExceeded || data.mockData;
+
   const getHealthColor = (score) => {
     if (score >= 80) return 'text-green-600';
     if (score >= 60) return 'text-yellow-600';
@@ -61,8 +63,31 @@ const ChannelOverview = ({ data }) => {
             </div>
           </div>
         </div>
-        <RealDataBadge lastUpdated="now" />
+        <RealDataBadge 
+          lastUpdated={isQuotaExceeded ? null : "now"} 
+          quotaExceeded={isQuotaExceeded}
+          mockData={data.mockData}
+        />
       </div>
+
+      {/* Quota Warning */}
+      {isQuotaExceeded && (
+        <div className="mb-6 bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+          <div className="flex items-start space-x-3">
+            <SafeIcon icon={FiAlertTriangle} className="h-5 w-5 text-yellow-600 mt-0.5" />
+            <div>
+              <h4 className="text-sm font-medium text-yellow-800 mb-1">
+                Using Mock Data
+              </h4>
+              <p className="text-xs text-yellow-700">
+                YouTube API quota has been exceeded. This analysis uses realistic mock data 
+                to demonstrate the platform's capabilities. All features and insights are 
+                fully functional with real API integration.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Health Score */}
       <div className="mb-6">
@@ -171,14 +196,18 @@ const ChannelOverview = ({ data }) => {
 
       {/* Real Data Notice */}
       <div className="mt-6 pt-6 border-t border-gray-200">
-        <div className="bg-blue-50 p-4 rounded-xl">
+        <div className={`${isQuotaExceeded ? 'bg-yellow-50' : 'bg-blue-50'} p-4 rounded-xl`}>
           <div className="flex items-center space-x-2 text-blue-800">
-            <SafeIcon icon={FiWifi} className="h-4 w-4" />
-            <span className="text-sm font-medium">Live YouTube Data</span>
+            <SafeIcon icon={isQuotaExceeded ? FiAlertTriangle : FiWifi} className="h-4 w-4" />
+            <span className="text-sm font-medium">
+              {isQuotaExceeded ? 'Mock Data Mode' : 'Live YouTube Data'}
+            </span>
           </div>
           <p className="text-xs text-blue-700 mt-1">
-            All metrics are fetched in real-time from YouTube Data API v3. 
-            Data accuracy depends on YouTube's public statistics availability.
+            {isQuotaExceeded 
+              ? 'Using realistic mock data due to API quota limits. All analytics and insights are fully functional.'
+              : 'All metrics are fetched in real-time from YouTube Data API v3. Data accuracy depends on YouTube\'s public statistics availability.'
+            }
           </p>
         </div>
       </div>

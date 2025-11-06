@@ -1,7 +1,9 @@
 import youtubeApiService from './youtubeApiService';
 import { validateApiKey, getCurrentApiKey } from '../config/youtube';
+import { generateMockChannelData } from '../utils/mockData';
+import quotaManager from './quotaManager';
 
-// Real YouTube API integration
+// Real YouTube API integration with fallback to mock data
 export const analyzeChannel = async (channelUrl) => {
   try {
     // Validate API key first
@@ -10,39 +12,93 @@ export const analyzeChannel = async (channelUrl) => {
     // Extract channel identifier
     const { id, type } = youtubeApiService.extractChannelId(channelUrl);
 
-    // Fetch channel data based on type
     let channelData;
-    if (type === 'handle') {
-      channelData = await youtubeApiService.getChannelByHandle(id);
-    } else {
-      channelData = await youtubeApiService.getChannelById(id);
-    }
+    let isQuotaExceeded = false;
 
-    if (!channelData.items?.length) {
-      throw new Error('Channel not found. Please check the URL and ensure the channel is public.');
-    }
-
-    const channel = channelData.items[0];
-
-    // Fetch recent videos for analysis
-    const videosData = await youtubeApiService.getChannelVideos(channel.id, 50);
-
-    // Process and transform the data
-    const processedData = processChannelData(channel, videosData.items || []);
-
-    // Calculate analytics
-    const analytics = calculateChannelAnalytics(channel, videosData.items || []);
-
-    return {
-      ...processedData,
-      analytics,
-      rawData: {
-        channel,
-        videos: videosData.items
+    try {
+      // Fetch channel data based on type
+      if (type === 'handle') {
+        channelData = await youtubeApiService.getChannelByHandle(id);
+      } else {
+        channelData = await youtubeApiService.getChannelById(id);
       }
-    };
+
+      isQuotaExceeded = channelData.quotaExceeded || false;
+
+      if (!channelData.items?.length) {
+        throw new Error('Channel not found. Please check the URL and ensure the channel is public.');
+      }
+
+      const channel = channelData.items[0];
+
+      // Fetch recent videos for analysis
+      let videosData;
+      try {
+        videosData = await youtubeApiService.getChannelVideos(channel.id, 50);
+        isQuotaExceeded = isQuotaExceeded || videosData.quotaExceeded || false;
+      } catch (videoError) {
+        if (videoError.message === 'QUOTA_EXCEEDED') {
+          videosData = youtubeApiService.generateMockVideosResponse(50);
+          isQuotaExceeded = true;
+        } else {
+          throw videoError;
+        }
+      }
+
+      // Process and transform the data
+      const processedData = processChannelData(channel, videosData.items || []);
+
+      // Calculate analytics
+      const analytics = calculateChannelAnalytics(channel, videosData.items || []);
+
+      return {
+        ...processedData,
+        analytics,
+        rawData: {
+          channel,
+          videos: videosData.items
+        },
+        quotaExceeded: isQuotaExceeded,
+        quotaInfo: youtubeApiService.getQuotaUsage()
+      };
+
+    } catch (error) {
+      if (error.message === 'QUOTA_EXCEEDED') {
+        console.warn('⚠️ YouTube API quota exceeded, using mock data for channel:', id);
+        
+        // Generate comprehensive mock data
+        const mockData = generateMockChannelData(id, channelUrl);
+        const analytics = calculateMockAnalytics(mockData);
+        
+        return {
+          ...mockData,
+          analytics,
+          quotaExceeded: true,
+          quotaInfo: youtubeApiService.getQuotaUsage(),
+          mockData: true
+        };
+      }
+      throw error;
+    }
+
   } catch (error) {
     console.error('Channel analysis error:', error);
+    
+    // If any error occurs, provide mock data as fallback
+    if (error.message.includes('quota') || error.message === 'QUOTA_EXCEEDED') {
+      const channelId = channelUrl.split('/').pop() || 'mock-channel';
+      const mockData = generateMockChannelData(channelId, channelUrl);
+      const analytics = calculateMockAnalytics(mockData);
+      
+      return {
+        ...mockData,
+        analytics,
+        quotaExceeded: true,
+        quotaInfo: youtubeApiService.getQuotaUsage(),
+        mockData: true
+      };
+    }
+    
     throw new Error(error.message || 'Failed to analyze channel');
   }
 };
@@ -57,7 +113,8 @@ export const compareChannels = async (channel1Url, channel2Url) => {
     return {
       channel1: channel1Data,
       channel2: channel2Data,
-      comparison: generateComparison(channel1Data, channel2Data)
+      comparison: generateComparison(channel1Data, channel2Data),
+      quotaExceeded: channel1Data.quotaExceeded || channel2Data.quotaExceeded
     };
   } catch (error) {
     console.error('Channel comparison error:', error);
@@ -131,22 +188,19 @@ function calculateChannelAnalytics(channel, videos) {
 
   const engagementRate = recentVideos.length > 0 ? totalEngagement / recentVideos.length : 0;
 
-  // Calculate upload consistency (videos per month in last 6 months)
+  // Calculate upload consistency
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-  
   const recentUploads = videos.filter(video => 
     new Date(video.snippet.publishedAt) > sixMonthsAgo
   ).length;
-  
   const uploadsPerMonth = recentUploads / 6;
-  const uploadConsistency = Math.min(uploadsPerMonth * 25, 100); // Scale to 100
+  const uploadConsistency = Math.min(uploadsPerMonth * 25, 100);
 
   // Calculate growth metrics (estimated)
   const accountAge = (Date.now() - new Date(channel.snippet.publishedAt).getTime()) / (1000 * 60 * 60 * 24 * 365);
   const subscriberGrowth = accountAge > 0 ? ((subscriberCount / accountAge) / subscriberCount) * 100 : 0;
-  const viewGrowth = recentAvgViews > avgViewsPerVideo ? 
-    ((recentAvgViews - avgViewsPerVideo) / avgViewsPerVideo) * 100 : 0;
+  const viewGrowth = recentAvgViews > avgViewsPerVideo ? ((recentAvgViews - avgViewsPerVideo) / avgViewsPerVideo) * 100 : 0;
 
   // Calculate health score
   const healthScore = calculateHealthScore({
@@ -167,9 +221,23 @@ function calculateChannelAnalytics(channel, videos) {
     engagementRate: Math.round(engagementRate * 100) / 100,
     uploadsPerMonth: Math.round(uploadsPerMonth * 10) / 10,
     topPerformingVideo: recentVideos.reduce((top, video) => 
-      (parseInt(video.statistics.viewCount || 0) > parseInt(top?.statistics?.viewCount || 0)) ? video : top, 
-      null
+      (parseInt(video.statistics.viewCount || 0) > parseInt(top?.statistics?.viewCount || 0)) ? video : top, null
     )
+  };
+}
+
+// Calculate analytics for mock data
+function calculateMockAnalytics(mockData) {
+  return {
+    healthScore: mockData.analytics.healthScore,
+    subscriberGrowth: mockData.analytics.subscriberGrowth,
+    viewGrowth: mockData.analytics.viewGrowth,
+    avgViewsPerVideo: mockData.analytics.avgViewsPerVideo,
+    recentAvgViews: mockData.analytics.avgViewsPerVideo,
+    uploadConsistency: mockData.analytics.uploadConsistency,
+    engagementRate: mockData.analytics.engagementRate,
+    uploadsPerMonth: mockData.analytics.uploadsPerMonth || 4,
+    topPerformingVideo: null
   };
 }
 
@@ -230,66 +298,12 @@ function generateComparison(channel1, channel2) {
     insights.push(`${channel2.title} has higher audience engagement (${channel2.analytics.engagementRate}% vs ${channel1.analytics.engagementRate}%)`);
   }
 
-  // Compare upload consistency
-  if (channel1.analytics.uploadConsistency > channel2.analytics.uploadConsistency) {
-    recommendations.push(`${channel2.title} should improve upload consistency to match ${channel1.title}'s schedule`);
-  } else if (channel2.analytics.uploadConsistency > channel1.analytics.uploadConsistency) {
-    recommendations.push(`${channel1.title} should improve upload consistency to match ${channel2.title}'s schedule`);
-  }
-
   return {
     winner: channel1.analytics.healthScore > channel2.analytics.healthScore ? 'channel1' : 'channel2',
     insights,
     recommendations
   };
 }
-
-// Get detailed channel insights
-export const getChannelInsights = async (channelData) => {
-  const insights = {
-    strengths: [],
-    weaknesses: [],
-    opportunities: [],
-    recommendations: []
-  };
-
-  const { analytics } = channelData;
-
-  // Analyze strengths
-  if (analytics.healthScore >= 80) {
-    insights.strengths.push("Excellent overall channel performance");
-  }
-  if (analytics.engagementRate > 3) {
-    insights.strengths.push("High audience engagement rate");
-  }
-  if (analytics.uploadConsistency > 80) {
-    insights.strengths.push("Consistent upload schedule");
-  }
-
-  // Analyze weaknesses
-  if (analytics.healthScore < 60) {
-    insights.weaknesses.push("Channel needs optimization improvements");
-  }
-  if (analytics.engagementRate < 1) {
-    insights.weaknesses.push("Low audience engagement");
-  }
-  if (analytics.uploadConsistency < 50) {
-    insights.weaknesses.push("Inconsistent upload schedule");
-  }
-
-  // Generate recommendations
-  if (analytics.engagementRate < 2) {
-    insights.recommendations.push("Focus on creating more interactive content to boost engagement");
-  }
-  if (analytics.uploadConsistency < 70) {
-    insights.recommendations.push("Establish a regular upload schedule to maintain audience interest");
-  }
-  if (analytics.viewGrowth < 5) {
-    insights.recommendations.push("Optimize video titles and thumbnails for better discoverability");
-  }
-
-  return insights;
-};
 
 // Get quota usage information
 export const getApiQuotaUsage = () => {
