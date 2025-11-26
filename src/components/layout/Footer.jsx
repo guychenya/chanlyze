@@ -91,7 +91,7 @@ const Footer = () => {
           </p>
           <p className="text-gray-400 text-sm flex items-center mt-4 md:mt-0">
             Made with <SafeIcon icon={FiHeart} className="h-4 w-4 text-red-500 mx-1" /> by{' '}
-            <a href="https://github.com/guychenya" target="_blank" rel="noopener noreferrer" className="ml-1 text-white hover:text-red-500 transition-colors">
+            <a href="https://www.linkedin.com/in/guychenya/" target="_blank" rel="noopener noreferrer" className="ml-1 text-white hover:text-red-500 transition-colors">
               Guy Chenya
             </a>
             {' '}for educational purposes

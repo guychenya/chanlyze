@@ -10,7 +10,14 @@ const ActionsStrip = () => {
   const navigate = useNavigate();
 
   const handleDownloadReport = () => {
-    window.print();
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(document.documentElement.outerHTML);
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+    }, 250);
   };
 
   const handleCompare = () => {

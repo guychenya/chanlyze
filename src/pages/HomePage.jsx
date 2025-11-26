@@ -41,10 +41,9 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 pt-12 pb-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%),radial-gradient(circle_at_70%_60%,rgba(99,102,241,0.1),transparent_50%)]"></div>
+      <section className="relative overflow-hidden bg-white pt-12 pb-20">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.div
@@ -54,7 +53,7 @@ const HomePage = () => {
             >
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 Grow your YouTube channel faster with AI:<br />
-                <span className="bg-gradient-to-r from-red-600 to-purple-600 bg-clip-text text-transparent">insights, optimization, and competitor gaps</span>
+                <span className="text-gray-900">insights, optimization, and competitor gaps</span>
               </h1>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
                 Pinpoint what to publish next, improve titles/thumbnails, and track growth weekly.
@@ -76,11 +75,11 @@ const HomePage = () => {
                   value={channelUrl}
                   onChange={(e) => setChannelUrl(e.target.value)}
                   placeholder="Paste your channel link to start"
-                  className="flex-1 px-6 py-4 rounded-xl bg-white/80 backdrop-blur-sm border-2 border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none text-lg transition-all"
+                  className="flex-1 px-6 py-4 rounded-xl bg-white border-2 border-gray-300 focus:border-gray-900 outline-none text-lg transition-all"
                 />
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-red-700 hover:to-red-800 transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
+                  className="bg-gray-900 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
                 >
                   Start Free Analysis
                 </button>
@@ -93,7 +92,7 @@ const HomePage = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-red-600 hover:text-red-700 font-medium inline-flex items-center space-x-1 transition-colors"
+              className="text-gray-900 hover:text-gray-600 font-medium inline-flex items-center space-x-1 transition-colors"
             >
               <SafeIcon icon={FiPlay} className="h-4 w-4" />
               <span>Watch Demo</span>
@@ -106,57 +105,57 @@ const HomePage = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="max-w-4xl mx-auto mt-12"
             >
-              <div className="bg-white/70 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-white/20">
+              <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-200">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Health Score */}
-                  <div className="text-center p-4 bg-gradient-to-br from-green-400/20 to-green-600/20 backdrop-blur-sm rounded-xl border border-green-200/50">
+                  <div className="text-center p-4 bg-gray-50 rounded-xl border border-gray-200">
                     <div className="flex items-center justify-center mb-2">
-                      <SafeIcon icon={FiActivity} className="h-6 w-6 text-green-600" />
-                      <span className="ml-2 text-sm font-medium text-green-800">Channel Health</span>
+                      <SafeIcon icon={FiActivity} className="h-6 w-6 text-gray-900" />
+                      <span className="ml-2 text-sm font-medium text-gray-900">Channel Health</span>
                     </div>
-                    <div className="text-4xl font-bold text-green-600 mb-1">82/100</div>
-                    <div className="w-full bg-green-200/50 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full" style={{ width: '82%' }}></div>
+                    <div className="text-4xl font-bold text-gray-900 mb-1">82/100</div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-gray-900 h-2 rounded-full" style={{ width: '82%' }}></div>
                     </div>
                   </div>
 
                   {/* Top Opportunity */}
-                  <div className="p-4 bg-gradient-to-br from-blue-400/20 to-blue-600/20 backdrop-blur-sm rounded-xl border border-blue-200/50">
+                  <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
                     <div className="flex items-center mb-2">
-                      <SafeIcon icon={FiClock} className="h-5 w-5 text-blue-600" />
-                      <span className="ml-2 text-sm font-semibold text-blue-800">Top Opportunity</span>
+                      <SafeIcon icon={FiClock} className="h-5 w-5 text-gray-900" />
+                      <span className="ml-2 text-sm font-semibold text-gray-900">Top Opportunity</span>
                     </div>
-                    <p className="text-sm text-blue-900 font-medium">Post on Tue 3–5pm</p>
-                    <p className="text-xs text-blue-700 mt-1">Expected +18% CTR</p>
+                    <p className="text-sm text-gray-900 font-medium">Post on Tue 3–5pm</p>
+                    <p className="text-xs text-gray-600 mt-1">Expected +18% CTR</p>
                   </div>
 
                   {/* Thumbnail CTR */}
-                  <div className="p-4 bg-gradient-to-br from-purple-400/20 to-purple-600/20 backdrop-blur-sm rounded-xl border border-purple-200/50">
+                  <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center">
-                        <SafeIcon icon={FiImage} className="h-5 w-5 text-purple-600" />
-                        <span className="ml-2 text-sm font-semibold text-purple-800">Thumbnail CTR</span>
+                        <SafeIcon icon={FiImage} className="h-5 w-5 text-gray-900" />
+                        <span className="ml-2 text-sm font-semibold text-gray-900">Thumbnail CTR</span>
                       </div>
-                      <span className="text-lg font-bold text-purple-600">7.2%</span>
+                      <span className="text-lg font-bold text-gray-900">7.2%</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <div className="flex-1 bg-purple-200/50 rounded-full h-2">
-                        <div className="bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full" style={{ width: '72%' }}></div>
+                      <div className="flex-1 bg-gray-200 rounded-full h-2">
+                        <div className="bg-gray-900 h-2 rounded-full" style={{ width: '72%' }}></div>
                       </div>
-                      <span className="text-xs text-purple-700">vs 5.8% niche avg</span>
+                      <span className="text-xs text-gray-600">vs 5.8% niche avg</span>
                     </div>
                   </div>
 
                   {/* Title Quality */}
-                  <div className="p-4 bg-gradient-to-br from-orange-400/20 to-orange-600/20 backdrop-blur-sm rounded-xl border border-orange-200/50">
+                  <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center">
-                        <SafeIcon icon={FiEdit3} className="h-5 w-5 text-orange-600" />
-                        <span className="ml-2 text-sm font-semibold text-orange-800">Title Quality</span>
+                        <SafeIcon icon={FiEdit3} className="h-5 w-5 text-gray-900" />
+                        <span className="ml-2 text-sm font-semibold text-gray-900">Title Quality</span>
                       </div>
-                      <span className="text-lg font-bold text-orange-600">B+</span>
+                      <span className="text-lg font-bold text-gray-900">B+</span>
                     </div>
-                    <p className="text-xs text-orange-700">Add numbers for +12% clicks</p>
+                    <p className="text-xs text-gray-600">Add numbers for +12% clicks</p>
                   </div>
                 </div>
                 <p className="text-center text-sm text-gray-600 mt-4">
@@ -169,7 +168,7 @@ const HomePage = () => {
       </section>
 
       {/* Social Proof */}
-      <section className="py-12 bg-white border-b border-gray-200">
+      <section className="py-12 bg-gray-50 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
@@ -193,7 +192,7 @@ const HomePage = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-12 bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
@@ -202,9 +201,9 @@ const HomePage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/50 hover:shadow-xl transition-shadow"
+                className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow"
               >
-                <div className="text-2xl font-bold bg-gradient-to-r from-red-600 to-purple-600 bg-clip-text text-transparent mb-2">{t.metric}</div>
+                <div className="text-2xl font-bold text-gray-900 mb-2">{t.metric}</div>
                 <div className="text-sm text-gray-900 font-medium">{t.name}</div>
                 <div className="text-xs text-gray-600">{t.role}, {t.subs}</div>
               </motion.div>
@@ -214,7 +213,7 @@ const HomePage = () => {
       </section>
 
       {/* Value Blocks */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {valueBlocks.map((block, i) => (
@@ -225,12 +224,12 @@ const HomePage = () => {
                 transition={{ delay: i * 0.1 }}
                 className="text-center group"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-purple-600 rounded-xl mb-4 shadow-lg group-hover:shadow-xl transition-shadow">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-xl mb-4 shadow-lg group-hover:shadow-xl transition-shadow">
                   <SafeIcon icon={block.icon} className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{block.title}</h3>
                 <p className="text-gray-600 mb-4">{block.description}</p>
-                <button className="text-red-600 hover:text-red-700 text-sm font-medium transition-colors">
+                <button className="text-gray-900 hover:text-gray-600 text-sm font-medium transition-colors">
                   See an example →
                 </button>
               </motion.div>
@@ -240,12 +239,12 @@ const HomePage = () => {
       </section>
 
       {/* Demo Video */}
-      <section id="demo" className="py-16 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <section id="demo" className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">See Chanlyze in Action</h2>
           <p className="text-gray-600 mb-8">Watch how to get insights in 60 seconds</p>
-          <div className="bg-white/70 backdrop-blur-xl rounded-2xl shadow-2xl p-2 border border-white/50">
-            <div className="aspect-video bg-gradient-to-br from-gray-100/80 to-gray-200/80 backdrop-blur-sm rounded-xl flex items-center justify-center">
+          <div className="bg-white rounded-2xl shadow-2xl p-2 border border-gray-200">
+            <div className="aspect-video bg-gray-100 rounded-xl flex items-center justify-center">
               <div className="text-center">
                 <SafeIcon icon={FiPlay} className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                 <p className="text-gray-500">45-second demo video</p>
@@ -257,22 +256,22 @@ const HomePage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-r from-red-600 via-red-700 to-purple-700">
+      <section className="py-16 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             Ready to grow faster?
           </h2>
-          <p className="text-red-100 mb-8">
+          <p className="text-gray-300 mb-8">
             Join 10,000+ creators optimizing their content with AI
           </p>
           <button
             onClick={() => navigate('/analyze')}
-            className="bg-white/95 backdrop-blur-sm text-red-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white transition-all shadow-lg hover:shadow-2xl inline-flex items-center space-x-2"
+            className="bg-white text-gray-900 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-2xl inline-flex items-center space-x-2"
           >
             <span>Start Free Analysis</span>
             <SafeIcon icon={FiArrowRight} className="h-5 w-5" />
           </button>
-          <p className="text-red-100 text-sm mt-3">No password or credit card required</p>
+          <p className="text-gray-400 text-sm mt-3">No password or credit card required</p>
         </div>
       </section>
     </div>

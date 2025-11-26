@@ -62,8 +62,7 @@ const ResultsPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%),radial-gradient(circle_at_70%_60%,rgba(99,102,241,0.08),transparent_50%)] pointer-events-none"></div>
+    <div className="min-h-screen bg-gray-50">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <DashboardHeader data={channelData} />
         
