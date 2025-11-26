@@ -62,7 +62,12 @@ const ResultsPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7F8FA]">
+    <div className="min-h-screen bg-[#0a0a0f] relative overflow-hidden">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-purple-900/30 via-purple-800/20 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-indigo-900/30 via-purple-900/20 to-transparent rounded-full blur-3xl"></div>
+      </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <DashboardHeader data={channelData} />
         
