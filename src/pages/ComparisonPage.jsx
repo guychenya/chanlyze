@@ -55,10 +55,10 @@ const ComparisonPage = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Compare <span className="gradient-text">YouTube Channels</span>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Compare <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">YouTube Channels</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Benchmark your channel against competitors using real-time YouTube data. 
             Discover opportunities for growth with side-by-side analytics comparison.
           </p>

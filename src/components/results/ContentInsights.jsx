@@ -53,14 +53,14 @@ const ContentInsights = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+      className="bg-[#1A1D2E]/60 backdrop-blur-xl border border-purple-500/30 rounded-xl p-6 shadow-sm"
     >
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Content Insights</h3>
+        <h3 className="text-lg font-semibold text-white">Content Insights</h3>
         <div className="flex items-center space-x-2">
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center space-x-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm transition-colors"
+            className="flex items-center space-x-2 px-3 py-2 bg-gray-700/30 hover:bg-gray-700/50 border border-gray-700/30 rounded-lg text-sm text-gray-300 transition-colors"
           >
             <SafeIcon icon={FiFilter} className="h-4 w-4" />
             <span>Filters</span>
@@ -68,7 +68,7 @@ const ContentInsights = () => {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-3 py-2 bg-gray-100 rounded-lg text-sm border-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 bg-gray-700/30 border border-gray-700/30 text-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-purple-500"
           >
             <option value="views">Sort by Views</option>
             <option value="engagement">Sort by Engagement</option>
@@ -81,12 +81,12 @@ const ContentInsights = () => {
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          className="mb-4 p-4 bg-gray-50 rounded-lg"
+          className="mb-4 p-4 bg-[#1A1D2E]/40 border border-purple-500/20 rounded-lg"
         >
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="text-xs text-gray-600 mb-1 block">Duration</label>
-              <select className="w-full px-2 py-1 text-sm border border-gray-300 rounded">
+              <label className="text-xs text-gray-400 mb-1 block">Duration</label>
+              <select className="w-full px-2 py-1 text-sm bg-gray-700/30 border border-gray-700/30 text-gray-300 rounded">
                 <option>All</option>
                 <option>0-10 min</option>
                 <option>10-20 min</option>
@@ -94,16 +94,16 @@ const ContentInsights = () => {
               </select>
             </div>
             <div>
-              <label className="text-xs text-gray-600 mb-1 block">Day</label>
-              <select className="w-full px-2 py-1 text-sm border border-gray-300 rounded">
+              <label className="text-xs text-gray-400 mb-1 block">Day</label>
+              <select className="w-full px-2 py-1 text-sm bg-gray-700/30 border border-gray-700/30 text-gray-300 rounded">
                 <option>All days</option>
                 <option>Weekdays</option>
                 <option>Weekends</option>
               </select>
             </div>
             <div>
-              <label className="text-xs text-gray-600 mb-1 block">Type</label>
-              <select className="w-full px-2 py-1 text-sm border border-gray-300 rounded">
+              <label className="text-xs text-gray-400 mb-1 block">Type</label>
+              <select className="w-full px-2 py-1 text-sm bg-gray-700/30 border border-gray-700/30 text-gray-300 rounded">
                 <option>All types</option>
                 <option>"How to"</option>
                 <option>Tutorial</option>
@@ -120,13 +120,13 @@ const ContentInsights = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+            className="flex items-center space-x-4 p-4 bg-[#1A1D2E]/40 border border-purple-500/20 rounded-lg hover:border-purple-500/40 transition-colors cursor-pointer"
           >
-            <div className="text-lg font-bold text-gray-400 w-8">#{index + 1}</div>
+            <div className="text-lg font-bold text-gray-500 w-8">#{index + 1}</div>
             
             <div className="flex-1">
-              <h4 className="font-medium text-gray-900 mb-2">{video.title}</h4>
-              <div className="flex items-center space-x-4 text-sm text-gray-600">
+              <h4 className="font-medium text-white mb-2">{video.title}</h4>
+              <div className="flex items-center space-x-4 text-sm text-gray-400">
                 <div className="flex items-center space-x-1">
                   <SafeIcon icon={FiEye} className="h-4 w-4" />
                   <span>{video.views.toLocaleString()}</span>
@@ -135,7 +135,7 @@ const ContentInsights = () => {
                   <SafeIcon icon={FiThumbsUp} className="h-4 w-4" />
                   <span>{video.engagement}%</span>
                 </div>
-                <div className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">
+                <div className="px-2 py-1 bg-blue-500/10 text-blue-300 border border-blue-500/30 rounded text-xs font-medium">
                   {video.ctr}% CTR
                 </div>
                 <div className="flex items-center space-x-1">

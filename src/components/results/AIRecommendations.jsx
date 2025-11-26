@@ -43,9 +43,9 @@ const AIRecommendations = () => {
 
   const getConfidenceBadge = (confidence) => {
     const styles = {
-      high: 'bg-green-100 text-green-700 border-green-300',
-      medium: 'bg-yellow-100 text-yellow-700 border-yellow-300',
-      low: 'bg-gray-100 text-gray-700 border-gray-300'
+      high: 'bg-green-500/10 text-green-300 border-green-500/30',
+      medium: 'bg-yellow-500/10 text-yellow-300 border-yellow-500/30',
+      low: 'bg-gray-500/10 text-gray-300 border-gray-500/30'
     };
     return styles[confidence] || styles.medium;
   };
@@ -54,11 +54,11 @@ const AIRecommendations = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+      className="bg-[#1A1D2E]/60 backdrop-blur-xl border border-purple-500/30 rounded-xl p-6 shadow-sm"
     >
       <div className="flex items-center space-x-2 mb-6">
-        <SafeIcon icon={FiZap} className="h-6 w-6 text-yellow-500" />
-        <h3 className="text-lg font-semibold text-gray-900">AI-Powered Recommendations</h3>
+        <SafeIcon icon={FiZap} className="h-6 w-6 text-yellow-400" />
+        <h3 className="text-lg font-semibold text-white">AI-Powered Recommendations</h3>
       </div>
 
       <div className="space-y-4">
@@ -68,30 +68,30 @@ const AIRecommendations = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all"
+            className="border border-purple-500/20 bg-[#1A1D2E]/40 rounded-lg p-4 hover:border-purple-500/40 transition-all"
           >
             <div className="flex items-start space-x-3 mb-3">
-              <div className="p-2 bg-blue-50 rounded-lg">
-                <SafeIcon icon={rec.icon} className="h-5 w-5 text-blue-600" />
+              <div className="p-2 bg-blue-500/10 rounded-lg border border-blue-500/30">
+                <SafeIcon icon={rec.icon} className="h-5 w-5 text-blue-400" />
               </div>
               
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1">
-                  <h4 className="font-semibold text-gray-900">{rec.title}</h4>
+                  <h4 className="font-semibold text-white">{rec.title}</h4>
                   <span className={`text-xs px-2 py-1 rounded-full border ${getConfidenceBadge(rec.confidence)}`}>
                     {rec.confidence} confidence
                   </span>
                 </div>
                 
-                <p className="text-sm text-gray-600 mb-3">{rec.description}</p>
+                <p className="text-sm text-gray-300 mb-3">{rec.description}</p>
                 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">Expected Impact</span>
-                    <span className="font-semibold text-green-600">+{rec.impact}%</span>
+                    <span className="text-gray-400">Expected Impact</span>
+                    <span className="font-semibold text-green-400">+{rec.impact}%</span>
                   </div>
                   
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-700/30 rounded-full h-2">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${rec.impact * 3}%` }}
@@ -101,7 +101,7 @@ const AIRecommendations = () => {
                   </div>
                 </div>
 
-                <button className="mt-3 text-xs text-blue-600 hover:text-blue-700 flex items-center space-x-1">
+                <button className="mt-3 text-xs text-blue-400 hover:text-blue-300 flex items-center space-x-1">
                   <SafeIcon icon={FiBarChart2} className="h-3 w-3" />
                   <span>View supporting data</span>
                 </button>
@@ -111,12 +111,12 @@ const AIRecommendations = () => {
         ))}
       </div>
 
-      <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+      <div className="mt-6 p-4 bg-blue-500/10 rounded-lg border border-blue-500/30">
         <div className="flex items-start space-x-3">
-          <SafeIcon icon={FiTarget} className="h-5 w-5 text-blue-600 mt-0.5" />
+          <SafeIcon icon={FiTarget} className="h-5 w-5 text-blue-400 mt-0.5" />
           <div>
-            <h4 className="font-semibold text-blue-900 mb-1">Methodology</h4>
-            <p className="text-xs text-blue-800">
+            <h4 className="font-semibold text-blue-300 mb-1">Methodology</h4>
+            <p className="text-xs text-blue-200">
               Recommendations are computed using machine learning analysis of your channel's historical performance, 
               audience behavior patterns, and industry benchmarks from similar channels.
             </p>

@@ -27,16 +27,16 @@ const UploadTimingHeatmap = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+      className="bg-[#1A1D2E]/60 backdrop-blur-xl border border-purple-500/30 rounded-xl p-6 shadow-sm"
     >
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Best Upload Times</h3>
+      <h3 className="text-lg font-semibold text-white mb-4">Best Upload Times</h3>
       
       <div className="overflow-x-auto">
         <div className="inline-block min-w-full">
           <div className="flex mb-2">
             <div className="w-16"></div>
             {hours.map((hour) => (
-              <div key={hour} className="flex-1 text-center text-xs text-gray-600 font-medium">
+              <div key={hour} className="flex-1 text-center text-xs text-gray-400 font-medium">
                 {hour}
               </div>
             ))}
@@ -44,7 +44,7 @@ const UploadTimingHeatmap = () => {
           
           {days.map((day, dayIndex) => (
             <div key={day} className="flex items-center mb-1">
-              <div className="w-16 text-sm text-gray-600 font-medium">{day}</div>
+              <div className="w-16 text-sm text-gray-400 font-medium">{day}</div>
               {heatmapData[dayIndex].map((value, hourIndex) => (
                 <div key={hourIndex} className="flex-1 px-0.5">
                   <div
@@ -58,7 +58,7 @@ const UploadTimingHeatmap = () => {
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-between text-xs text-gray-600">
+      <div className="mt-4 flex items-center justify-between text-xs text-gray-400">
         <span>Lower engagement</span>
         <div className="flex items-center space-x-1">
           <div className="w-4 h-4 bg-green-100 rounded"></div>

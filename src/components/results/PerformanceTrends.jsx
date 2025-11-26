@@ -22,15 +22,15 @@ const PerformanceTrends = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+      className="bg-[#1A1D2E]/60 backdrop-blur-xl border border-purple-500/30 rounded-xl p-6 shadow-sm"
     >
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Performance Trends</h3>
+        <h3 className="text-lg font-semibold text-white">Performance Trends</h3>
         <div className="flex items-center space-x-4">
           <button
             onClick={() => setShowViews(!showViews)}
             className={`flex items-center space-x-2 px-3 py-1 rounded-lg text-sm transition-colors ${
-              showViews ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'
+              showViews ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' : 'bg-gray-700/20 text-gray-400 border border-gray-700/30'
             }`}
           >
             <SafeIcon icon={FiEye} className="h-4 w-4" />
@@ -39,7 +39,7 @@ const PerformanceTrends = () => {
           <button
             onClick={() => setShowSubs(!showSubs)}
             className={`flex items-center space-x-2 px-3 py-1 rounded-lg text-sm transition-colors ${
-              showSubs ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-500'
+              showSubs ? 'bg-red-500/20 text-red-300 border border-red-500/30' : 'bg-gray-700/20 text-gray-400 border border-gray-700/30'
             }`}
           >
             <SafeIcon icon={FiUsers} className="h-4 w-4" />

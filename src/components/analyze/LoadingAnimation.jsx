@@ -7,12 +7,12 @@ const LoadingAnimation = ({ step, steps }) => {
   const { FiLoader, FiCheckCircle } = FiIcons;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center">
+    <div className="min-h-screen bg-[#0B0D17] flex items-center justify-center">
       <div className="max-w-md mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-2xl shadow-xl p-8 text-center"
+          className="bg-[#1A1D2E]/60 backdrop-blur-xl border border-purple-500/30 rounded-2xl shadow-xl p-8 text-center"
         >
           {/* Animated Logo */}
           <motion.div
@@ -23,11 +23,11 @@ const LoadingAnimation = ({ step, steps }) => {
             <SafeIcon icon={FiLoader} className="h-8 w-8 text-white" />
           </motion.div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-bold text-white mb-2">
             Analyzing Your Channel
           </h2>
           
-          <p className="text-gray-600 mb-8">
+          <p className="text-gray-300 mb-8">
             Please wait while we process your channel data...
           </p>
 
@@ -45,26 +45,26 @@ const LoadingAnimation = ({ step, steps }) => {
               >
                 <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
                   index < step 
-                    ? 'bg-green-100' 
+                    ? 'bg-green-500/20' 
                     : index === step 
-                    ? 'bg-red-100' 
-                    : 'bg-gray-100'
+                    ? 'bg-purple-500/20' 
+                    : 'bg-gray-700/20'
                 }`}>
                   {index < step ? (
-                    <SafeIcon icon={FiCheckCircle} className="h-4 w-4 text-green-600" />
+                    <SafeIcon icon={FiCheckCircle} className="h-4 w-4 text-green-400" />
                   ) : index === step ? (
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                     >
-                      <SafeIcon icon={FiLoader} className="h-4 w-4 text-red-600" />
+                      <SafeIcon icon={FiLoader} className="h-4 w-4 text-purple-400" />
                     </motion.div>
                   ) : (
-                    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                    <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
                   )}
                 </div>
                 <span className={`text-sm ${
-                  index <= step ? 'text-gray-900' : 'text-gray-500'
+                  index <= step ? 'text-gray-200' : 'text-gray-500'
                 }`}>
                   {stepText}
                 </span>
@@ -74,15 +74,15 @@ const LoadingAnimation = ({ step, steps }) => {
 
           {/* Progress Bar */}
           <div className="mt-8">
-            <div className="bg-gray-200 rounded-full h-2">
+            <div className="bg-gray-700/30 rounded-full h-2">
               <motion.div
-                className="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
                 initial={{ width: '0%' }}
                 animate={{ width: `${((step + 1) / steps.length) * 100}%` }}
                 transition={{ duration: 0.5 }}
               />
             </div>
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="text-sm text-gray-400 mt-2">
               {Math.round(((step + 1) / steps.length) * 100)}% complete
             </p>
           </div>
