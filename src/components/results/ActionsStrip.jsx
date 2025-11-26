@@ -7,11 +7,15 @@ const ActionsStrip = () => {
   const { FiDownload, FiCalendar, FiGitCompare, FiClock } = FiIcons;
   const [dateRange, setDateRange] = useState('90');
 
+  const handleDownloadReport = () => {
+    window.print();
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 sticky top-4 z-10"
+      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 sticky top-4 z-10 no-print"
     >
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center space-x-3">
@@ -41,7 +45,10 @@ const ActionsStrip = () => {
             <span>Updated now</span>
           </div>
 
-          <button className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-lg text-sm font-medium transition-all shadow-sm hover:shadow-md">
+          <button 
+            onClick={handleDownloadReport}
+            className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-lg text-sm font-medium transition-all shadow-sm hover:shadow-md"
+          >
             <SafeIcon icon={FiDownload} className="h-4 w-4" />
             <span>Download Full Report</span>
           </button>
