@@ -46,7 +46,7 @@ const PrivacyPage = () => {
 
             <section>
               <h2 className="text-2xl font-semibold text-[#0B0D12] mb-3">7. Contact</h2>
-              <p>For questions about this privacy policy, contact us at: <a href="mailto:info@chanlyze@relatech.org" className="text-[#2A6AF7] hover:text-[#245EE0] hover:underline font-medium">info@chanlyze@relatech.org</a></p>
+              <p>For questions about this privacy policy, contact us at: <a href="mailto:info@relatech.org" className="text-[#2A6AF7] hover:text-[#245EE0] hover:underline font-medium">info@relatech.org</a></p>
             </section>
           </div>
         </motion.div>

@@ -72,7 +72,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@chanlyze@relatech.org" className="text-gray-400 hover:text-white transition-colors">
+                <a href="mailto:info@relatech.org" className="text-gray-400 hover:text-white transition-colors">
                   Support
                 </a>
               </li>
