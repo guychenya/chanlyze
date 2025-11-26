@@ -156,3 +156,5 @@ const ComparisonPage = () => {
     </div>
   );
 };
+
+export default ComparisonPage;
