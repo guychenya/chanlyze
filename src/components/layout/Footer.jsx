@@ -7,18 +7,18 @@ const Footer = () => {
   const { FiPlay, FiGithub, FiTwitter, FiMail, FiHeart } = FiIcons;
 
   return (
-    <footer className="bg-[#0f0f17] border-t border-purple-500/20">
+    <footer className="bg-[#0B0D17] border-t border-purple-500/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-lg">
+              <div className="bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 p-2 rounded-lg">
                 <SafeIcon icon={FiPlay} className="h-6 w-6 text-white" />
               </div>
               <span className="text-xl font-bold text-white">Chanlyze</span>
             </div>
-            <p className="text-gray-400 mb-4 max-w-md">
+            <p className="text-gray-400 mb-4 max-w-md leading-relaxed">
               Transform your YouTube analytics into actionable growth strategies. 
               Get AI-powered insights, competitor analysis, and optimization recommendations.
             </p>
@@ -85,7 +85,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-purple-500/20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-purple-500/30 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
             © 2024 Chanlyze. All rights reserved.
           </p>

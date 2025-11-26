@@ -62,11 +62,11 @@ const ResultsPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] relative overflow-hidden">
-      {/* Gradient Background */}
+    <div className="min-h-screen bg-[#0B0D17] relative overflow-hidden">
+      {/* Animated Gradient Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-purple-900/30 via-purple-800/20 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-indigo-900/30 via-purple-900/20 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute top-[-10%] right-[-5%] w-[1000px] h-[1000px] bg-gradient-to-br from-purple-600/20 via-purple-800/10 to-transparent rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] left-[-5%] w-[800px] h-[800px] bg-gradient-to-tr from-indigo-600/20 via-purple-700/10 to-transparent rounded-full blur-[120px] animate-pulse" style={{animationDelay: '1s'}}></div>
       </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <DashboardHeader data={channelData} />

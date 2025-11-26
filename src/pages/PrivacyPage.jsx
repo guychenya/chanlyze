@@ -3,16 +3,16 @@ import { motion } from 'framer-motion';
 
 const PrivacyPage = () => {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] relative overflow-hidden py-12">
-      {/* Gradient Background */}
+    <div className="min-h-screen bg-[#0B0D17] relative overflow-hidden py-12">
+      {/* Animated Gradient Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-purple-900/30 via-purple-800/20 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-gradient-to-br from-purple-600/20 via-purple-800/10 to-transparent rounded-full blur-[120px]"></div>
       </div>
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-[#1a1a24]/60 backdrop-blur-xl rounded-2xl p-8 border border-purple-500/20"
+          className="bg-[#1A1D2E]/60 backdrop-blur-2xl rounded-2xl p-8 border border-purple-500/30"
         >
           <h1 className="text-4xl font-semibold text-white mb-6">Privacy Policy</h1>
           <p className="text-sm text-gray-400 mb-8">Last updated: November 26, 2025</p>
