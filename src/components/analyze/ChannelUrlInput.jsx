@@ -27,7 +27,7 @@ const ChannelUrlInput = ({ onAnalyze }) => {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="https://youtube.com/@channelname or https://youtube.com/c/channelname"
-          className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl text-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+          className="w-full pl-12 pr-4 py-4 bg-[#0B0D17]/80 border border-purple-500/30 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-white"
           required
         />
       </div>
@@ -37,7 +37,7 @@ const ChannelUrlInput = ({ onAnalyze }) => {
         disabled={!url.trim() || !isValidUrl(url)}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="w-full bg-red-600 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2"
+        className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:from-red-700 hover:to-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2"
       >
         <SafeIcon icon={FiSearch} className="h-5 w-5" />
         <span>Analyze Channel</span>
