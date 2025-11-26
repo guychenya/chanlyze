@@ -23,13 +23,13 @@ const Footer = () => {
               Get AI-powered insights, competitor analysis, and optimization recommendations.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://github.com/guychenya/chanlyze" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <SafeIcon icon={FiGithub} className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <SafeIcon icon={FiTwitter} className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="mailto:info@chanlyze@relatech.org" className="text-gray-400 hover:text-white transition-colors">
                 <SafeIcon icon={FiMail} className="h-5 w-5" />
               </a>
             </div>
@@ -62,24 +62,24 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="https://github.com/guychenya/chanlyze#readme" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                   Documentation
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="https://developers.google.com/youtube/v3" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                   API Reference
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="mailto:info@chanlyze@relatech.org" className="text-gray-400 hover:text-white transition-colors">
                   Support
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -90,7 +90,11 @@ const Footer = () => {
             © 2024 Chanlyze. All rights reserved.
           </p>
           <p className="text-gray-400 text-sm flex items-center mt-4 md:mt-0">
-            Made with <SafeIcon icon={FiHeart} className="h-4 w-4 text-red-500 mx-1" /> for creators
+            Made with <SafeIcon icon={FiHeart} className="h-4 w-4 text-red-500 mx-1" /> by{' '}
+            <a href="https://github.com/guychenya" target="_blank" rel="noopener noreferrer" className="ml-1 text-white hover:text-red-500 transition-colors">
+              Guy Chenya
+            </a>
+            {' '}for educational purposes
           </p>
         </div>
       </div>

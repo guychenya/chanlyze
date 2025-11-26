@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import AnalyzePage from './pages/AnalyzePage';
 import ResultsPage from './pages/ResultsPage';
 import ComparisonPage from './pages/ComparisonPage';
+import PrivacyPage from './pages/PrivacyPage';
 import './App.css';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/analyze" element={<AnalyzePage />} />
             <Route path="/results/:channelId" element={<ResultsPage />} />
             <Route path="/compare" element={<ComparisonPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
           </Routes>
         </motion.main>
         <Footer />
