@@ -87,16 +87,16 @@ const HomePage = () => {
               <p className="text-sm text-gray-500 mt-2">No login • 60-second scan</p>
             </motion.form>
 
-            <motion.a
+            <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              href="#demo"
+              onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
               className="text-red-600 hover:text-red-700 font-medium inline-flex items-center space-x-1"
             >
               <SafeIcon icon={FiPlay} className="h-4 w-4" />
               <span>Watch Demo</span>
-            </motion.a>
+            </motion.button>
 
             {/* Mini Dashboard Preview */}
             <motion.div
