@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../../common/SafeIcon';
@@ -6,9 +7,14 @@ import SafeIcon from '../../common/SafeIcon';
 const ActionsStrip = () => {
   const { FiDownload, FiCalendar, FiGitCompare, FiClock } = FiIcons;
   const [dateRange, setDateRange] = useState('90');
+  const navigate = useNavigate();
 
   const handleDownloadReport = () => {
     window.print();
+  };
+
+  const handleCompare = () => {
+    navigate('/compare');
   };
 
   return (
@@ -33,7 +39,10 @@ const ActionsStrip = () => {
             </select>
           </div>
 
-          <button className="flex items-center space-x-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg text-sm transition-colors">
+          <button 
+            onClick={handleCompare}
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg text-sm transition-colors"
+          >
             <SafeIcon icon={FiGitCompare} className="h-4 w-4" />
             <span>Compare Channels</span>
           </button>
