@@ -9,6 +9,7 @@ import ApiKeySetup from '../components/analyze/ApiKeySetup';
 import QuotaMonitor from '../components/analyze/QuotaMonitor';
 import { compareChannels } from '../services/youtubeService';
 import { hasValidApiKey } from '../config/youtube';
+import { GradientBackground } from '../styles/theme.jsx';
 
 const ComparisonPage = () => {
   const { FiVs } = FiIcons;
@@ -47,8 +48,9 @@ const ComparisonPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0D17] py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#0B0D17] relative overflow-hidden py-12">
+      <GradientBackground />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -101,48 +103,48 @@ const ComparisonPage = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="max-w-4xl mx-auto mt-12"
           >
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">
+            <div className="bg-[#1A1D2E]/60 backdrop-blur-2xl rounded-2xl p-8 border border-purple-500/30">
+              <h3 className="text-xl font-semibold text-white mb-6 text-center">
                 Real-Time Comparison Features
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <div className="bg-green-100 p-2 rounded-lg">
-                      <SafeIcon icon={FiVs} className="h-4 w-4 text-green-600" />
+                    <div className="bg-green-900/50 border border-green-500/30 p-2 rounded-lg">
+                      <SafeIcon icon={FiVs} className="h-4 w-4 text-green-300" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900">Live Statistics</h4>
-                      <p className="text-sm text-gray-600">Real subscriber counts, views, and video metrics</p>
+                      <h4 className="font-medium text-white">Live Statistics</h4>
+                      <p className="text-sm text-gray-300">Real subscriber counts, views, and video metrics</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="bg-blue-100 p-2 rounded-lg">
-                      <SafeIcon icon={FiVs} className="h-4 w-4 text-blue-600" />
+                    <div className="bg-blue-900/50 border border-blue-500/30 p-2 rounded-lg">
+                      <SafeIcon icon={FiVs} className="h-4 w-4 text-blue-300" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900">Performance Analysis</h4>
-                      <p className="text-sm text-gray-600">Detailed comparison of recent video performance</p>
+                      <h4 className="font-medium text-white">Performance Analysis</h4>
+                      <p className="text-sm text-gray-300">Detailed comparison of recent video performance</p>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <div className="bg-purple-100 p-2 rounded-lg">
-                      <SafeIcon icon={FiVs} className="h-4 w-4 text-purple-600" />
+                    <div className="bg-purple-900/50 border border-purple-500/30 p-2 rounded-lg">
+                      <SafeIcon icon={FiVs} className="h-4 w-4 text-purple-300" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900">Engagement Metrics</h4>
-                      <p className="text-sm text-gray-600">Like rates, comment engagement, and interaction analysis</p>
+                      <h4 className="font-medium text-white">Engagement Metrics</h4>
+                      <p className="text-sm text-gray-300">Like rates, comment engagement, and interaction analysis</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="bg-orange-100 p-2 rounded-lg">
-                      <SafeIcon icon={FiVs} className="h-4 w-4 text-orange-600" />
+                    <div className="bg-orange-900/50 border border-orange-500/30 p-2 rounded-lg">
+                      <SafeIcon icon={FiVs} className="h-4 w-4 text-orange-300" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900">Growth Insights</h4>
-                      <p className="text-sm text-gray-600">Upload frequency and content strategy analysis</p>
+                      <h4 className="font-medium text-white">Growth Insights</h4>
+                      <p className="text-sm text-gray-300">Upload frequency and content strategy analysis</p>
                     </div>
                   </div>
                 </div>
@@ -154,5 +156,3 @@ const ComparisonPage = () => {
     </div>
   );
 };
-
-export default ComparisonPage;

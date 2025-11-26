@@ -29,19 +29,19 @@ const ComparisonInput = ({ onCompare, isLoading }) => {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-2xl shadow-xl p-8 text-center"
+          className="bg-[#1A1D2E]/60 backdrop-blur-2xl rounded-2xl p-8 text-center border border-purple-500/30"
         >
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="bg-gradient-to-r from-red-500 to-red-600 p-4 rounded-full inline-flex mb-6"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full inline-flex mb-6"
           >
             <SafeIcon icon={FiSearch} className="h-8 w-8 text-white" />
           </motion.div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-bold text-white mb-2">
             Analyzing Channels
           </h2>
-          <p className="text-gray-600">
+          <p className="text-gray-300">
             Comparing channel metrics and generating insights...
           </p>
         </motion.div>
@@ -56,15 +56,15 @@ const ComparisonInput = ({ onCompare, isLoading }) => {
       transition={{ duration: 0.6 }}
       className="max-w-4xl mx-auto"
     >
-      <div className="bg-white rounded-2xl shadow-xl p-8">
+      <div className="bg-[#1A1D2E]/60 backdrop-blur-2xl rounded-2xl p-8 border border-purple-500/30">
         <div className="text-center mb-8">
-          <div className="bg-red-100 p-3 rounded-full inline-flex mb-4">
-            <SafeIcon icon={FiVs} className="h-8 w-8 text-red-600" />
+          <div className="bg-purple-900/50 border border-purple-500/30 p-3 rounded-full inline-flex mb-4">
+            <SafeIcon icon={FiVs} className="h-8 w-8 text-purple-300" />
           </div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+          <h2 className="text-2xl font-semibold text-white mb-2">
             Enter Two Channels to Compare
           </h2>
-          <p className="text-gray-600">
+          <p className="text-gray-300">
             Compare subscriber growth, video performance, and engagement metrics
           </p>
         </div>
@@ -73,7 +73,7 @@ const ComparisonInput = ({ onCompare, isLoading }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Channel 1 */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
                 Channel 1
               </label>
               <div className="relative">
@@ -85,7 +85,7 @@ const ComparisonInput = ({ onCompare, isLoading }) => {
                   value={channel1Url}
                   onChange={(e) => setChannel1Url(e.target.value)}
                   placeholder="https://youtube.com/@channel1"
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                  className="w-full pl-12 pr-4 py-3 bg-[#0B0D17]/80 border border-purple-500/30 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-white"
                   required
                 />
               </div>
@@ -93,7 +93,7 @@ const ComparisonInput = ({ onCompare, isLoading }) => {
 
             {/* Channel 2 */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
                 Channel 2
               </label>
               <div className="relative">
@@ -105,7 +105,7 @@ const ComparisonInput = ({ onCompare, isLoading }) => {
                   value={channel2Url}
                   onChange={(e) => setChannel2Url(e.target.value)}
                   placeholder="https://youtube.com/@channel2"
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                  className="w-full pl-12 pr-4 py-3 bg-[#0B0D17]/80 border border-purple-500/30 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-white"
                   required
                 />
               </div>
@@ -117,7 +117,7 @@ const ComparisonInput = ({ onCompare, isLoading }) => {
             disabled={!canSubmit}
             whileHover={{ scale: canSubmit ? 1.02 : 1 }}
             whileTap={{ scale: canSubmit ? 0.98 : 1 }}
-            className="w-full bg-red-600 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2"
+            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2"
           >
             <SafeIcon icon={FiVs} className="h-5 w-5" />
             <span>Compare Channels</span>
@@ -125,8 +125,8 @@ const ComparisonInput = ({ onCompare, isLoading }) => {
         </form>
 
         {/* Example Comparisons */}
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900 mb-4 text-center">
+        <div className="mt-8 pt-8 border-t border-purple-500/30">
+          <h3 className="text-lg font-medium text-white mb-4 text-center">
             Popular Comparisons:
           </h3>
           <div className="flex flex-wrap justify-center gap-2">
@@ -141,7 +141,7 @@ const ComparisonInput = ({ onCompare, isLoading }) => {
                   setChannel1Url(`https://youtube.com/${ch1}`);
                   setChannel2Url(`https://youtube.com/${ch2}`);
                 }}
-                className="text-sm text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-2 rounded-lg transition-colors"
+                className="text-sm text-purple-300 hover:text-purple-200 bg-purple-900/50 hover:bg-purple-800/50 px-3 py-2 rounded-lg transition-colors"
               >
                 {ch1} vs {ch2}
               </button>
