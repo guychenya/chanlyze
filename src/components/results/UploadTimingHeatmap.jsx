@@ -16,11 +16,11 @@ const UploadTimingHeatmap = () => {
   ];
 
   const getColor = (value) => {
-    if (value >= 5) return 'bg-green-600';
-    if (value >= 4) return 'bg-green-500';
-    if (value >= 3) return 'bg-green-400';
-    if (value >= 2) return 'bg-green-300';
-    return 'bg-green-100';
+    if (value >= 5) return 'bg-green-500';
+    if (value >= 4) return 'bg-green-600';
+    if (value >= 3) return 'bg-green-700';
+    if (value >= 2) return 'bg-green-800';
+    return 'bg-green-900';
   };
 
   return (
@@ -61,22 +61,22 @@ const UploadTimingHeatmap = () => {
       <div className="mt-4 flex items-center justify-between text-xs text-gray-400">
         <span>Lower engagement</span>
         <div className="flex items-center space-x-1">
-          <div className="w-4 h-4 bg-green-100 rounded"></div>
-          <div className="w-4 h-4 bg-green-300 rounded"></div>
-          <div className="w-4 h-4 bg-green-500 rounded"></div>
+          <div className="w-4 h-4 bg-green-900 rounded"></div>
+          <div className="w-4 h-4 bg-green-700 rounded"></div>
           <div className="w-4 h-4 bg-green-600 rounded"></div>
+          <div className="w-4 h-4 bg-green-500 rounded"></div>
         </div>
         <span>Higher engagement</span>
       </div>
 
-      <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
+      <div className="mt-4 bg-blue-900/50 border border-blue-500/30 rounded-lg p-3">
         <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-          <span className="text-sm font-medium text-blue-800">
+          <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+          <span className="text-sm font-medium text-blue-300">
             Optimal: Tuesdays at 2 PM
           </span>
         </div>
-        <p className="text-xs text-blue-700 mt-1 ml-4">23% higher engagement during this time slot</p>
+        <p className="text-xs text-blue-400 mt-1 ml-4">23% higher engagement during this time slot</p>
       </div>
     </motion.div>
   );

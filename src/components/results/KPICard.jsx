@@ -13,12 +13,12 @@ const KPICard = ({ title, value, delta, trend, sparklineData, icon, delay = 0, t
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
-      className="bg-white/70 backdrop-blur-xl rounded-xl p-4 shadow-lg border border-white/50 hover:shadow-xl transition-all group"
+      className="bg-[#1A1D2E]/60 backdrop-blur-xl rounded-xl p-4 shadow-lg border border-purple-500/30 hover:border-purple-500/50 transition-all group"
     >
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center space-x-2">
-          <SafeIcon icon={icon} className="h-5 w-5 text-gray-600" />
-          <span className="text-sm text-gray-600 font-medium">{title}</span>
+          <SafeIcon icon={icon} className="h-5 w-5 text-gray-300" />
+          <span className="text-sm text-gray-300 font-medium">{title}</span>
         </div>
         {tooltip && (
           <div className="relative group/tooltip">
@@ -30,15 +30,15 @@ const KPICard = ({ title, value, delta, trend, sparklineData, icon, delay = 0, t
         )}
       </div>
       
-      <div className="text-2xl font-bold text-gray-900 mb-1">{value}</div>
+      <div className="text-2xl font-bold text-white mb-1">{value}</div>
       
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-1">
           <SafeIcon 
             icon={isPositive ? FiTrendingUp : FiTrendingDown} 
-            className={`h-3 w-3 ${isPositive ? 'text-green-500' : 'text-red-500'}`} 
+            className={`h-3 w-3 ${isPositive ? 'text-green-400' : 'text-red-400'}`} 
           />
-          <span className={`text-xs font-medium ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
+          <span className={`text-xs font-medium ${isPositive ? 'text-green-400' : 'text-red-400'}`}>
             {isPositive ? '+' : ''}{delta}%
           </span>
           <span className="text-xs text-gray-500">vs prev</span>
@@ -52,7 +52,7 @@ const KPICard = ({ title, value, delta, trend, sparklineData, icon, delay = 0, t
               <Line 
                 type="monotone" 
                 dataKey="value" 
-                stroke={isPositive ? '#10b981' : '#ef4444'} 
+                stroke={isPositive ? '#34d399' : '#f87171'} 
                 strokeWidth={2}
                 dot={false}
               />

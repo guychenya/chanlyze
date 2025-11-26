@@ -158,18 +158,18 @@ const ContentInsights = () => {
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-4">
-        <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg">
-          <h4 className="font-semibold text-purple-900 mb-2">Content Patterns</h4>
-          <ul className="text-sm text-purple-800 space-y-1">
-            <li>• "How to" titles: <span className="font-semibold">+40% views</span></li>
-            <li>• 12-18 min videos: <span className="font-semibold">Best engagement</span></li>
-            <li>• Tuesday uploads: <span className="font-semibold">+23% CTR</span></li>
+        <div className="bg-purple-900/50 border border-purple-500/30 p-4 rounded-lg">
+          <h4 className="font-semibold text-purple-300 mb-2">Content Patterns</h4>
+          <ul className="text-sm text-purple-400 space-y-1">
+            <li>• "How to" titles: <span className="font-semibold text-white">+40% views</span></li>
+            <li>• 12-18 min videos: <span className="font-semibold text-white">Best engagement</span></li>
+            <li>• Tuesday uploads: <span className="font-semibold text-white">+23% CTR</span></li>
           </ul>
         </div>
         
-        <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg">
-          <h4 className="font-semibold text-orange-900 mb-2">Quick Wins</h4>
-          <ul className="text-sm text-orange-800 space-y-1">
+        <div className="bg-orange-900/50 border border-orange-500/30 p-4 rounded-lg">
+          <h4 className="font-semibold text-orange-300 mb-2">Quick Wins</h4>
+          <ul className="text-sm text-orange-400 space-y-1">
             <li>• Add timestamps to videos</li>
             <li>• Use bright thumbnails</li>
             <li>• Include trending keywords</li>

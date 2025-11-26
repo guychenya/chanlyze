@@ -56,12 +56,12 @@ const PerformanceTrends = () => {
               <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-          <XAxis dataKey="month" stroke="#6b7280" />
-          <YAxis yAxisId="left" stroke="#3b82f6" />
-          <YAxis yAxisId="right" orientation="right" stroke="#ef4444" />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(229, 231, 235, 0.1)" />
+          <XAxis dataKey="month" stroke="#9ca3af" />
+          <YAxis yAxisId="left" stroke="#60a5fa" />
+          <YAxis yAxisId="right" orientation="right" stroke="#f87171" />
           <Tooltip 
-            contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+            contentStyle={{ backgroundColor: 'rgba(26, 29, 46, 0.8)', border: '1px solid rgba(167, 139, 250, 0.3)', borderRadius: '8px', color: '#fff' }}
             formatter={(value, name) => [
               name === 'views' ? value.toLocaleString() + ' views' : value.toLocaleString() + ' subs',
               name === 'views' ? 'Views' : 'Subscribers'
@@ -72,7 +72,7 @@ const PerformanceTrends = () => {
               yAxisId="left"
               type="monotone" 
               dataKey="views" 
-              stroke="#3b82f6" 
+              stroke="#60a5fa" 
               strokeWidth={3}
               fill="url(#viewsGradient)"
             />
@@ -82,9 +82,9 @@ const PerformanceTrends = () => {
               yAxisId="right"
               type="monotone" 
               dataKey="subs" 
-              stroke="#ef4444" 
+              stroke="#f87171" 
               strokeWidth={3}
-              dot={{ fill: '#ef4444', r: 4 }}
+              dot={{ fill: '#f87171', r: 4 }}
             />
           )}
           <ReferenceDot 
@@ -92,21 +92,21 @@ const PerformanceTrends = () => {
             y={350000} 
             yAxisId="left"
             r={8} 
-            fill="#10b981" 
-            stroke="#fff" 
+            fill="#34d399" 
+            stroke="#1A1D2E" 
             strokeWidth={2}
           />
         </ComposedChart>
       </ResponsiveContainer>
 
-      <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
+      <div className="mt-4 bg-green-900/50 border border-green-500/30 rounded-lg p-3">
         <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span className="text-sm font-medium text-green-800">
+          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+          <span className="text-sm font-medium text-green-300">
             June 2024: 350K views, +7K subs
           </span>
         </div>
-        <p className="text-xs text-green-700 mt-1 ml-4">Best performing month with consistent upload schedule</p>
+        <p className="text-xs text-green-400 mt-1 ml-4">Best performing month with consistent upload schedule</p>
       </div>
     </motion.div>
   );

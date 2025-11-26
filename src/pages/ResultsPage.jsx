@@ -95,21 +95,21 @@ const ResultsPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+              className="bg-[#1A1D2E]/60 backdrop-blur-xl border border-purple-500/30 rounded-xl p-6 shadow-sm"
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Stats</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">Quick Stats</h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Videos</span>
-                  <span className="font-semibold text-gray-900">{channelData.videoCount}</span>
+                  <span className="text-sm text-gray-300">Videos</span>
+                  <span className="font-semibold text-white">{channelData.videoCount}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Uploads/Month</span>
-                  <span className="font-semibold text-gray-900">{channelData.analytics.uploadsPerMonth}</span>
+                  <span className="text-sm text-gray-300">Uploads/Month</span>
+                  <span className="font-semibold text-white">{channelData.analytics.uploadsPerMonth}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Consistency</span>
-                  <span className="font-semibold text-gray-900">{channelData.analytics.uploadConsistency}%</span>
+                  <span className="text-sm text-gray-300">Consistency</span>
+                  <span className="font-semibold text-white">{channelData.analytics.uploadConsistency}%</span>
                 </div>
               </div>
             </motion.div>
