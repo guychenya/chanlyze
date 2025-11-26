@@ -11,7 +11,7 @@ import ContentInsights from '../components/results/ContentInsights';
 import AIRecommendations from '../components/results/AIRecommendations';
 import { generateMockChannelData } from '../utils/mockData';
 
-import { GradientBackground } from '../styles/theme';
+import { GradientBackground } from '../styles/theme.jsx';
 
 const ResultsPage = () => {
   const { FiUsers, FiEye, FiPlay, FiTrendingUp, FiActivity } = FiIcons;

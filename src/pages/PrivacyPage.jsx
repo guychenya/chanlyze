@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GradientBackground } from '../styles/theme';
+import { GradientBackground } from '../styles/theme.jsx';
 
 const PrivacyPage = () => {
   return (
