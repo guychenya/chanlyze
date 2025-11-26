@@ -35,7 +35,7 @@ const Header = () => {
                 to={item.href}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   location.pathname === item.href
-                    ? 'bg-red-50 text-red-600'
+                    ? 'text-white font-bold'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
@@ -81,7 +81,7 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   location.pathname === item.href
-                    ? 'bg-red-50 text-red-600'
+                    ? 'text-white font-bold'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
