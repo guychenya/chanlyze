@@ -1,13 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { GradientBackground } from '../styles/theme';
 
 const PrivacyPage = () => {
   return (
     <div className="min-h-screen bg-[#0B0D17] relative overflow-hidden py-12">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-gradient-to-br from-purple-600/20 via-purple-800/10 to-transparent rounded-full blur-[120px]"></div>
-      </div>
+      <GradientBackground />
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

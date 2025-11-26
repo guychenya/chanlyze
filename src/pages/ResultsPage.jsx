@@ -11,6 +11,8 @@ import ContentInsights from '../components/results/ContentInsights';
 import AIRecommendations from '../components/results/AIRecommendations';
 import { generateMockChannelData } from '../utils/mockData';
 
+import { GradientBackground } from '../styles/theme';
+
 const ResultsPage = () => {
   const { FiUsers, FiEye, FiPlay, FiTrendingUp, FiActivity } = FiIcons;
   const { channelId } = useParams();
@@ -63,11 +65,7 @@ const ResultsPage = () => {
 
   return (
     <div className="min-h-screen bg-[#0B0D17] relative overflow-hidden">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[1000px] h-[1000px] bg-gradient-to-br from-purple-600/20 via-purple-800/10 to-transparent rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-[-10%] left-[-5%] w-[800px] h-[800px] bg-gradient-to-tr from-indigo-600/20 via-purple-700/10 to-transparent rounded-full blur-[120px] animate-pulse" style={{animationDelay: '1s'}}></div>
-      </div>
+      <GradientBackground />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <DashboardHeader data={channelData} />
         
