@@ -41,122 +41,99 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7F8FA]">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white pt-12 pb-20 border-b border-[#D6D9E0]">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {/* Hero Section with Gradient */}
+      <section className="relative overflow-hidden pt-20 pb-32">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-purple-500/10"></div>
+        <div className="absolute inset-0 backdrop-blur-3xl"></div>
+        
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl md:text-5xl font-semibold text-[#0B0D12] mb-4 tracking-tight">
-                Grow your YouTube channel faster with AI:<br />
-                <span className="text-[#2A6AF7]">insights, optimization, and competitor gaps</span>
+              <h1 className="text-5xl md:text-6xl font-bold text-[#0B0D12] mb-6 tracking-tight">
+                Grow your YouTube channel<br />
+                <span className="bg-gradient-to-r from-[#2A6AF7] via-[#5A44F2] to-[#2A6AF7] bg-clip-text text-transparent">
+                  faster with AI
+                </span>
               </h1>
-              <p className="text-lg text-[#5D6676] max-w-2xl mx-auto mb-8 leading-relaxed">
+              <p className="text-xl text-[#2A2F3A] max-w-2xl mx-auto mb-10 leading-relaxed">
                 Pinpoint what to publish next, improve titles/thumbnails, and track growth weekly.
-                Perfect for 1K–100K creators.
               </p>
             </motion.div>
 
-            {/* Inline URL Input + CTA */}
+            {/* Glassmorphism Input Card */}
             <motion.form
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               onSubmit={handleAnalyze}
-              className="max-w-2xl mx-auto mb-3"
+              className="max-w-2xl mx-auto mb-6"
             >
-              <div className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="text"
-                  value={channelUrl}
-                  onChange={(e) => setChannelUrl(e.target.value)}
-                  placeholder="Paste your channel link to start"
-                  className="flex-1 px-6 py-4 rounded-lg bg-white border border-[#D6D9E0] focus:border-[#9EC2FF] focus:ring-2 focus:ring-[#9EC2FF] outline-none text-base text-[#0B0D12] placeholder-[#5D6676] transition-all"
-                />
-                <button
-                  type="submit"
-                  className="bg-[#2A6AF7] text-white px-8 py-4 rounded-lg text-base font-semibold hover:bg-[#245EE0] active:bg-[#1D4CB8] transition-colors whitespace-nowrap"
-                >
-                  Start Free Analysis
-                </button>
+              <div className="bg-white/70 backdrop-blur-xl rounded-2xl p-2 shadow-xl border border-white/50">
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="text"
+                    value={channelUrl}
+                    onChange={(e) => setChannelUrl(e.target.value)}
+                    placeholder="Paste your channel link to start"
+                    className="flex-1 px-6 py-4 rounded-xl bg-white/90 border-0 outline-none text-base text-[#0B0D12] placeholder-[#5D6676]"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-gradient-to-r from-[#2A6AF7] to-[#5A44F2] text-white px-8 py-4 rounded-xl text-base font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all whitespace-nowrap"
+                  >
+                    Start Free Analysis
+                  </button>
+                </div>
               </div>
-              <p className="text-sm text-[#5D6676] mt-2">No login • 60-second scan</p>
+              <p className="text-sm text-[#5D6676] mt-3">No login • 60-second scan</p>
             </motion.form>
 
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-[#2A6AF7] hover:text-[#245EE0] hover:underline font-medium inline-flex items-center space-x-1 transition-colors text-sm"
-            >
-              <SafeIcon icon={FiPlay} className="h-4 w-4" />
-              <span>Watch Demo</span>
-            </motion.button>
-
-            {/* Mini Dashboard Preview */}
+            {/* Mini Dashboard with Glassmorphism */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="max-w-4xl mx-auto mt-12"
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="max-w-5xl mx-auto mt-16"
             >
-              <div className="bg-white rounded-lg shadow-[0_1px_3px_rgba(11,13,18,0.06)] p-6 border border-[#D6D9E0]">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white/60 backdrop-blur-2xl rounded-3xl p-8 shadow-2xl border border-white/50">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {/* Health Score */}
-                  <div className="p-4 bg-[#F7F8FA] rounded-lg border-l-4 border-[#2A6AF7]">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-semibold text-[#5D6676] uppercase tracking-wide">Channel Health</span>
-                      <SafeIcon icon={FiActivity} className="h-5 w-5 text-[#5D6676]" />
-                    </div>
-                    <div className="text-3xl font-bold text-[#0B0D12] mb-2">82<span className="text-lg text-[#5D6676]">/100</span></div>
-                    <div className="w-full bg-[#E6E9EF] rounded-full h-2">
-                      <div className="bg-[#2A6AF7] h-2 rounded-full" style={{ width: '82%' }}></div>
-                    </div>
+                  <div className="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 backdrop-blur-xl p-6 rounded-2xl border border-white/50">
+                    <SafeIcon icon={FiActivity} className="h-6 w-6 text-[#2A6AF7] mb-3" />
+                    <div className="text-xs font-semibold text-[#5D6676] uppercase tracking-wide mb-2">Health</div>
+                    <div className="text-4xl font-bold text-[#0B0D12]">82</div>
+                    <div className="text-sm text-[#14B657] font-semibold mt-1">+5.2%</div>
                   </div>
 
                   {/* Top Opportunity */}
-                  <div className="p-4 bg-[#FFF3E1] rounded-lg border-l-4 border-[#D98B12]">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-semibold text-[#5D6676] uppercase tracking-wide">Top Opportunity</span>
-                      <SafeIcon icon={FiClock} className="h-5 w-5 text-[#D98B12]" />
-                    </div>
-                    <p className="text-base font-semibold text-[#0B0D12]">Post on Tue 3–5pm</p>
-                    <p className="text-sm text-[#2A2F3A] mt-1">Expected <span className="text-[#14B657] font-semibold">+18%</span> CTR</p>
+                  <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 backdrop-blur-xl p-6 rounded-2xl border border-white/50">
+                    <SafeIcon icon={FiClock} className="h-6 w-6 text-[#D98B12] mb-3" />
+                    <div className="text-xs font-semibold text-[#5D6676] uppercase tracking-wide mb-2">Best Time</div>
+                    <div className="text-lg font-bold text-[#0B0D12]">Tue 3–5pm</div>
+                    <div className="text-sm text-[#14B657] font-semibold mt-1">+18% CTR</div>
                   </div>
 
                   {/* Thumbnail CTR */}
-                  <div className="p-4 bg-[#E8F7EF] rounded-lg border-l-4 border-[#14B657]">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-semibold text-[#5D6676] uppercase tracking-wide">Thumbnail CTR</span>
-                      <SafeIcon icon={FiImage} className="h-5 w-5 text-[#14B657]" />
-                    </div>
-                    <div className="flex items-baseline space-x-2">
-                      <span className="text-3xl font-bold text-[#0B0D12]">7.2%</span>
-                      <span className="text-sm text-[#5D6676]">vs 5.8% avg</span>
-                    </div>
-                    <div className="w-full bg-[#E6E9EF] rounded-full h-2 mt-2">
-                      <div className="bg-[#14B657] h-2 rounded-full" style={{ width: '72%' }}></div>
-                    </div>
+                  <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-xl p-6 rounded-2xl border border-white/50">
+                    <SafeIcon icon={FiImage} className="h-6 w-6 text-[#14B657] mb-3" />
+                    <div className="text-xs font-semibold text-[#5D6676] uppercase tracking-wide mb-2">CTR</div>
+                    <div className="text-4xl font-bold text-[#0B0D12]">7.2%</div>
+                    <div className="text-sm text-[#5D6676] mt-1">vs 5.8% avg</div>
                   </div>
 
                   {/* Title Quality */}
-                  <div className="p-4 bg-[#E7F0FF] rounded-lg border-l-4 border-[#2A6AF7]">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-semibold text-[#5D6676] uppercase tracking-wide">Title Quality</span>
-                      <SafeIcon icon={FiEdit3} className="h-5 w-5 text-[#2A6AF7]" />
-                    </div>
-                    <div className="text-3xl font-bold text-[#2A6AF7] mb-1">B+</div>
-                    <p className="text-sm text-[#2A2F3A]">Add numbers for <span className="text-[#14B657] font-semibold">+12%</span> clicks</p>
+                  <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-xl p-6 rounded-2xl border border-white/50">
+                    <SafeIcon icon={FiEdit3} className="h-6 w-6 text-[#5A44F2] mb-3" />
+                    <div className="text-xs font-semibold text-[#5D6676] uppercase tracking-wide mb-2">Title</div>
+                    <div className="text-4xl font-bold text-[#2A6AF7]">B+</div>
+                    <div className="text-sm text-[#14B657] font-semibold mt-1">+12% potential</div>
                   </div>
                 </div>
-                <p className="text-center text-sm text-[#5D6676] mt-4">
-                  Generated from your last 20 uploads in under a minute
-                </p>
               </div>
             </motion.div>
           </div>
@@ -164,31 +141,31 @@ const HomePage = () => {
       </section>
 
       {/* Social Proof */}
-      <section className="py-12 bg-[#F2F4F7]">
+      <section className="py-16 bg-white/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-[#0B0D12]">10,000+</div>
-              <div className="text-sm text-[#5D6676] mt-1">Channels analyzed</div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-[#2A6AF7] to-[#5A44F2] bg-clip-text text-transparent">10,000+</div>
+              <div className="text-sm text-[#5D6676] mt-2">Channels</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-[#0B0D12]">35%</div>
-              <div className="text-sm text-[#5D6676] mt-1">Average growth</div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-[#2A6AF7] to-[#5A44F2] bg-clip-text text-transparent">35%</div>
+              <div className="text-sm text-[#5D6676] mt-2">Avg Growth</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-[#0B0D12]">5+ hrs</div>
-              <div className="text-sm text-[#5D6676] mt-1">Saved weekly</div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-[#2A6AF7] to-[#5A44F2] bg-clip-text text-transparent">5+ hrs</div>
+              <div className="text-sm text-[#5D6676] mt-2">Saved Weekly</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-[#0B0D12]">98%</div>
-              <div className="text-sm text-[#5D6676] mt-1">Satisfaction</div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-[#2A6AF7] to-[#5A44F2] bg-clip-text text-transparent">98%</div>
+              <div className="text-sm text-[#5D6676] mt-2">Satisfaction</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-12 bg-white">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
@@ -197,7 +174,7 @@ const HomePage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-6 rounded-lg shadow-[0_1px_3px_rgba(11,13,18,0.06)] border border-[#D6D9E0] hover:border-[#9EC2FF] transition-colors"
+                className="bg-white/60 backdrop-blur-xl p-6 rounded-2xl border border-white/50 hover:shadow-xl transition-shadow"
               >
                 <div className="text-2xl font-bold text-[#14B657] mb-2">{t.metric}</div>
                 <div className="text-sm font-semibold text-[#0B0D12]">{t.name}</div>
@@ -209,7 +186,7 @@ const HomePage = () => {
       </section>
 
       {/* Value Blocks */}
-      <section className="py-16 bg-[#F7F8FA]">
+      <section className="py-16 bg-white/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {valueBlocks.map((block, i) => (
@@ -220,54 +197,36 @@ const HomePage = () => {
                 transition={{ delay: i * 0.1 }}
                 className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-[#2A6AF7] rounded-lg mb-4">
-                  <SafeIcon icon={block.icon} className="h-7 w-7 text-white" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#2A6AF7] to-[#5A44F2] rounded-2xl mb-4 shadow-lg">
+                  <SafeIcon icon={block.icon} className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-[#0B0D12] mb-2">{block.title}</h3>
-                <p className="text-[#5D6676] leading-relaxed mb-4">{block.description}</p>
-                <button className="text-[#2A6AF7] hover:text-[#245EE0] hover:underline text-sm font-medium transition-colors">
-                  See an example →
-                </button>
+                <h3 className="text-xl font-semibold text-[#0B0D12] mb-2">{block.title}</h3>
+                <p className="text-[#5D6676] leading-relaxed">{block.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Demo Video */}
-      <section id="demo" className="py-16 bg-white border-t border-[#D6D9E0]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-semibold text-[#0B0D12] mb-4">See Chanlyze in Action</h2>
-          <p className="text-[#5D6676] mb-8">Watch how to get insights in 60 seconds</p>
-          <div className="bg-white rounded-lg shadow-[0_1px_3px_rgba(11,13,18,0.06)] p-2 border border-[#D6D9E0]">
-            <div className="aspect-video bg-[#F2F4F7] rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <SafeIcon icon={FiPlay} className="h-16 w-16 text-[#5D6676] mx-auto mb-4" />
-                <p className="text-[#2A2F3A]">45-second demo video</p>
-                <p className="text-sm text-[#5D6676]">Paste channel → Get score → See opportunities</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section className="py-16 bg-[#2A6AF7]">
+      <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-semibold text-white mb-4">
-            Ready to grow faster?
-          </h2>
-          <p className="text-white/80 mb-8">
-            Join 10,000+ creators optimizing their content with AI
-          </p>
-          <button
-            onClick={() => navigate('/analyze')}
-            className="bg-white text-[#2A6AF7] px-8 py-4 rounded-lg text-base font-semibold hover:bg-[#F7F8FA] transition-colors inline-flex items-center space-x-2"
-          >
-            <span>Start Free Analysis</span>
-            <SafeIcon icon={FiArrowRight} className="h-5 w-5" />
-          </button>
-          <p className="text-white/70 text-sm mt-3">No password or credit card required</p>
+          <div className="bg-gradient-to-r from-[#2A6AF7] to-[#5A44F2] rounded-3xl p-12 shadow-2xl">
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Ready to grow faster?
+            </h2>
+            <p className="text-white/90 text-lg mb-8">
+              Join 10,000+ creators optimizing their content with AI
+            </p>
+            <button
+              onClick={() => navigate('/analyze')}
+              className="bg-white text-[#2A6AF7] px-10 py-4 rounded-xl text-lg font-semibold hover:bg-white/90 transition-all shadow-xl inline-flex items-center space-x-2"
+            >
+              <span>Start Free Analysis</span>
+              <SafeIcon icon={FiArrowRight} className="h-5 w-5" />
+            </button>
+            <p className="text-white/70 text-sm mt-4">No password or credit card required</p>
+          </div>
         </div>
       </section>
     </div>
