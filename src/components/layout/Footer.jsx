@@ -16,7 +16,7 @@ const Footer = () => {
               <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 rounded-lg">
                 <SafeIcon icon={FiPlay} className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-white">CreatorInsights</span>
+              <span className="text-xl font-bold text-white">Chanlyze</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               Transform your YouTube analytics into actionable growth strategies. 
@@ -87,7 +87,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2024 CreatorInsights. All rights reserved.
+            © 2024 Chanlyze. All rights reserved.
           </p>
           <p className="text-gray-400 text-sm flex items-center mt-4 md:mt-0">
             Made with <SafeIcon icon={FiHeart} className="h-4 w-4 text-red-500 mx-1" /> for creators

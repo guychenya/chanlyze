@@ -166,7 +166,7 @@ const HomePage = () => {
               Ready to Accelerate Your Growth?
             </h2>
             <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of creators who are already using CreatorInsights to optimize their content and grow their channels.
+              Join thousands of creators who are already using Chanlyze to optimize their content and grow their channels.
             </p>
             <Link
               to="/analyze"

@@ -24,7 +24,7 @@ const Header = () => {
             <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 rounded-lg">
               <SafeIcon icon={FiPlay} className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold gradient-text">CreatorInsights</span>
+            <span className="text-xl font-bold gradient-text">Chanlyze</span>
           </Link>
 
           {/* Desktop Navigation */}

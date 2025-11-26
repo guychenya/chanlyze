@@ -17,7 +17,7 @@ const StatsSection = () => {
             Trusted by Growing Creators
           </h2>
           <p className="text-xl text-gray-600">
-            See the impact CreatorInsights has made for content creators worldwide
+            See the impact Chanlyze has made for content creators worldwide
           </p>
         </div>
 

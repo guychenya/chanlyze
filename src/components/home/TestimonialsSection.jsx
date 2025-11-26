@@ -11,7 +11,7 @@ const TestimonialsSection = () => {
       name: 'Sarah Chen',
       role: 'Tech Reviewer',
       subscribers: '45K',
-      content: 'CreatorInsights helped me identify the perfect upload schedule and optimize my thumbnails. My views increased by 40% in just two months!',
+      content: 'Chanlyze helped me identify the perfect upload schedule and optimize my thumbnails. My views increased by 40% in just two months!',
       avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
     },
     {
@@ -38,7 +38,7 @@ const TestimonialsSection = () => {
             What Creators Are Saying
           </h2>
           <p className="text-xl text-gray-600">
-            Real results from real creators using CreatorInsights
+            Real results from real creators using Chanlyze
           </p>
         </div>
 

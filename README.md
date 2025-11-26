@@ -1,6 +1,65 @@
-# CreatorInsights - YouTube Channel Analyzer
+# Chanlyze - YouTube Channel Analyzer
 
 A comprehensive YouTube channel analytics tool that provides real-time insights, growth recommendations, and competitor analysis using the YouTube Data API v3.
+
+**🌐 Live Demo**: [chanlyze.netlify.app](https://chanlyze.netlify.app)  
+**📦 Repository**: [github.com/guychenya/chanlyze](https://github.com/guychenya/chanlyze)
+
+## 🚀 Quick Deploy
+
+This application deploys automatically via GitHub → Netlify:
+
+1. **Fork the repository** on GitHub
+2. **Connect to Netlify** (auto-deploys on push)
+3. **Add environment variables** in Netlify dashboard:
+   - `VITE_YOUTUBE_API_KEY` = your YouTube API key
+4. **Deploy!** - Netlify builds and deploys automatically
+
+**📚 Documentation:**
+- [Deployment Guide](./DEPLOYMENT.md) - GitHub & Netlify setup
+- [Getting Your API Key](./API_SETUP.md) - YouTube API configuration
+- [Contributing Guide](./CONTRIBUTING.md) - For developers
+
+## 📋 Prerequisites
+
+- **GitHub Account**
+- **Netlify Account** (free tier works)
+- **YouTube Data API v3 Key** (see [API_SETUP.md](./API_SETUP.md))
+
+## 🔑 Getting Your YouTube API Key
+
+1. Go to [Google Cloud Console](https://console.developers.google.com/)
+2. Create a new project (or select existing)
+3. Navigate to **APIs & Services** → **Library**
+4. Search for and enable **YouTube Data API v3**
+5. Go to **Credentials** → **Create Credentials** → **API Key**
+6. Copy your API key and add it to Netlify
+
+**Important**: Restrict your API key to YouTube Data API v3 only for security.
+
+## ⚙️ Configuration
+
+In Netlify dashboard, add environment variable:
+
+```
+VITE_YOUTUBE_API_KEY=your_actual_api_key_here
+```
+
+For local development, create `.env` file:
+
+```env
+VITE_YOUTUBE_API_KEY=your_actual_api_key_here
+VITE_YOUTUBE_QUOTA_LIMIT=10000
+```
+
+## 🛠️ Available Commands
+
+```bash
+npm run dev      # Start development server (http://localhost:5173)
+npm run build    # Build for production (runs linter first)
+npm run preview  # Preview production build
+npm run lint     # Run ESLint on all files
+```
 
 ## 🚀 Features
 
@@ -21,43 +80,6 @@ A comprehensive YouTube channel analytics tool that provides real-time insights,
 - **Smooth Animations**: Framer Motion powered interactions
 - **Real-Time Updates**: Live data fetching with progress indicators
 - **Quota Management**: API usage monitoring and optimization
-
-## 🛠️ Setup Instructions
-
-### 1. Get YouTube Data API v3 Key
-
-1. Go to [Google Cloud Console](https://console.developers.google.com/)
-2. Create a new project or select an existing one
-3. Enable the YouTube Data API v3
-4. Create credentials (API Key)
-5. Copy your API key
-
-### 2. Configure Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-VITE_YOUTUBE_API_KEY=your_youtube_api_key_here
-VITE_YOUTUBE_QUOTA_LIMIT=10000
-```
-
-### 3. Install Dependencies
-
-```bash
-npm install
-```
-
-### 4. Start Development Server
-
-```bash
-npm run dev
-```
-
-### 5. Build for Production
-
-```bash
-npm run build
-```
 
 ## 📊 API Usage & Quotas
 
@@ -128,27 +150,14 @@ https://youtube.com/user/username
 - **View Growth** (0-20 points)
 - **Video Count** (0-15 points)
 
-## 🚦 Error Handling
+## 🚦 Common Issues
 
-### Common Issues & Solutions
+See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for detailed solutions.
 
-**Invalid API Key**
-```
-Error: Invalid YouTube API key
-Solution: Check your API key in .env file
-```
-
-**Quota Exceeded**
-```
-Error: YouTube API quota exceeded
-Solution: Wait for quota reset or upgrade your limit
-```
-
-**Channel Not Found**
-```
-Error: Channel not found
-Solution: Ensure the channel URL is correct and public
-```
+**Quick fixes**:
+- **Invalid API Key**: Verify key in `.env` and restart server
+- **Quota Exceeded**: Wait for daily reset (midnight PT)
+- **Channel Not Found**: Check URL format and channel visibility
 
 ## 🔒 Privacy & Security
 
@@ -173,10 +182,13 @@ Solution: Ensure the channel URL is correct and public
 
 ## 🤝 Contributing
 
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
+
+Quick steps:
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
+4. Run `npm run lint` to check code
 5. Submit a pull request
 
 ## 📄 License
@@ -186,10 +198,10 @@ This project is licensed under the MIT License.
 ## 🆘 Support
 
 For issues and questions:
-1. Check the troubleshooting guide above
-2. Review YouTube API documentation
-3. Create an issue on GitHub
-4. Contact support team
+1. Check [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for common issues
+2. Review [DEPLOYMENT.md](./DEPLOYMENT.md) for deployment help
+3. Check [YouTube API documentation](https://developers.google.com/youtube/v3)
+4. Create an issue on GitHub with details
 
 ---
 
