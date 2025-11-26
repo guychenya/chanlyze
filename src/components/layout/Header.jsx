@@ -16,7 +16,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50">
+    <header className="bg-black/20 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -36,7 +36,7 @@ const Header = () => {
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   location.pathname === item.href
                     ? 'bg-red-50 text-red-600'
-                    : 'text-gray-600 hover:text-red-600 hover:bg-red-50'
+                    : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <SafeIcon icon={item.icon} className="h-4 w-4" />
@@ -58,7 +58,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:text-red-600 hover:bg-red-50"
+            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10"
           >
             <SafeIcon icon={isMenuOpen ? FiX : FiMenu} className="h-6 w-6" />
           </button>
@@ -71,7 +71,7 @@ const Header = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="md:hidden bg-white border-t border-gray-200"
+          className="md:hidden bg-black/80 backdrop-blur-lg border-t border-white/10"
         >
           <div className="px-4 py-2 space-y-1">
             {navigation.map((item) => (
@@ -82,7 +82,7 @@ const Header = () => {
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   location.pathname === item.href
                     ? 'bg-red-50 text-red-600'
-                    : 'text-gray-600 hover:text-red-600 hover:bg-red-50'
+                    : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <SafeIcon icon={item.icon} className="h-4 w-4" />
