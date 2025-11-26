@@ -28,16 +28,16 @@ const ActionsStrip = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 sticky top-4 z-10 no-print"
+      className="bg-[#1A1D2E]/60 backdrop-blur-xl rounded-xl p-4 shadow-sm border border-purple-500/30 sticky top-4 z-10 no-print"
     >
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center space-x-3">
           <div className="flex items-center space-x-2">
-            <SafeIcon icon={FiCalendar} className="h-5 w-5 text-gray-600" />
+            <SafeIcon icon={FiCalendar} className="h-5 w-5 text-gray-300" />
             <select
               value={dateRange}
               onChange={(e) => setDateRange(e.target.value)}
-              className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-3 py-2 bg-[#0B0D17]/80 border border-purple-500/30 rounded-lg text-sm text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             >
               <option value="30">Last 30 days</option>
               <option value="90">Last 90 days</option>
@@ -48,7 +48,7 @@ const ActionsStrip = () => {
 
           <button 
             onClick={handleCompare}
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg text-sm transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-[#0B0D17]/80 hover:bg-white/10 border border-purple-500/30 rounded-lg text-sm text-white transition-colors"
           >
             <SafeIcon icon={FiGitCompare} className="h-4 w-4" />
             <span>Compare Channels</span>
@@ -56,7 +56,7 @@ const ActionsStrip = () => {
         </div>
 
         <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2 text-xs text-gray-500">
+          <div className="flex items-center space-x-2 text-xs text-gray-400">
             <SafeIcon icon={FiClock} className="h-4 w-4" />
             <span>Updated now</span>
           </div>
@@ -71,8 +71,8 @@ const ActionsStrip = () => {
         </div>
       </div>
 
-      <div className="mt-3 pt-3 border-t border-gray-100">
-        <p className="text-xs text-gray-500">
+      <div className="mt-3 pt-3 border-t border-purple-500/30">
+        <p className="text-xs text-gray-400">
           <span className="font-medium">PDF Report includes:</span> Complete analytics, video performance breakdown, 
           competitor benchmarks, and actionable recommendations with supporting data.
         </p>
