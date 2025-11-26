@@ -96,10 +96,10 @@ const AnalyzePage = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Analyze Your <span className="gradient-text">YouTube Channel</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Get comprehensive insights, growth recommendations, and competitor analysis 
             for your YouTube channel using real-time data from YouTube API v3.
           </p>
