@@ -94,7 +94,7 @@ const Footer = () => {
             <a href="https://www.linkedin.com/in/guychenya/" target="_blank" rel="noopener noreferrer" className="ml-1 text-white hover:text-red-500 transition-colors">
               Guy Chenya
             </a>
-            {' '}for educational purposes
+            {' '}for{' '}educational purposes
           </p>
         </div>
       </div>
