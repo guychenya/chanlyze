@@ -13,7 +13,7 @@ const KPICard = ({ title, value, delta, trend, sparklineData, icon, delay = 0, t
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
-      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group"
+      className="bg-white/70 backdrop-blur-xl rounded-xl p-4 shadow-lg border border-white/50 hover:shadow-xl transition-all group"
     >
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center space-x-2">
