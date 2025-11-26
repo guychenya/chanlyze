@@ -14,7 +14,7 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#F7F8FA]">
         <Header />
         <motion.main 
           className="flex-1"
