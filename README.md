@@ -65,6 +65,13 @@ npm run lint     # Run ESLint on all files
 
 ## 🚀 Features
 
+### Optimized Landing Experience
+- **Inline Channel Input**: Paste URL and analyze in one click
+- **Mini-Dashboard Preview**: See sample insights before analyzing
+- **Outcome-Focused Copy**: Clear benefits for 1K-100K creators
+- **Social Proof**: 10,000+ channels, 35% average growth
+- **60-Second Analysis**: Fast insights without login
+
 ### Modern Dashboard (v2.0)
 - **KPI Cards**: 5 key metrics with sparklines and trend indicators
 - **Performance Trends**: Unified chart with dual y-axis for views and subscribers
