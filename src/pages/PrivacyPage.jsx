@@ -48,7 +48,7 @@ const PrivacyPage = () => {
 
             <section>
               <h2 className="text-2xl font-semibold text-white mb-3">7. Contact</h2>
-              <p>For questions about this privacy policy, contact us at: <a href="mailto:info@relatech.org" className="text-purple-400 hover:text-purple-300 hover:underline font-medium">info@relatech.org</a></p>
+              <p>For questions about this privacy policy, contact us at: <a href="mailto:info@reliatrack.org" className="text-purple-400 hover:text-purple-300 hover:underline font-medium">info@reliatrack.org</a></p>
             </section>
           </div>
         </motion.div>
