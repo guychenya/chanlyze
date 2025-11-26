@@ -18,6 +18,8 @@ This application deploys automatically via GitHub → Netlify:
 **📚 Documentation:**
 - [Deployment Guide](./DEPLOYMENT.md) - GitHub & Netlify setup
 - [Getting Your API Key](./API_SETUP.md) - YouTube API configuration
+- [Dashboard Redesign](./DASHBOARD_REDESIGN.md) - New dashboard features
+- [Implementation Guide](./IMPLEMENTATION_GUIDE.md) - Visual component guide
 - [Contributing Guide](./CONTRIBUTING.md) - For developers
 
 ## 📋 Prerequisites
@@ -62,6 +64,15 @@ npm run lint     # Run ESLint on all files
 ```
 
 ## 🚀 Features
+
+### Modern Dashboard (v2.0)
+- **KPI Cards**: 5 key metrics with sparklines and trend indicators
+- **Performance Trends**: Unified chart with dual y-axis for views and subscribers
+- **Upload Timing Heatmap**: Visual analysis of optimal posting schedule
+- **Content Insights**: Sortable video table with filters and pattern analysis
+- **AI Recommendations**: Impact-based suggestions with confidence levels
+- **Progressive Disclosure**: Expandable filters and detailed views
+- **Real-Time Indicators**: Live data status with visual feedback
 
 ### Real-Time YouTube Data Integration
 - **Live Statistics**: Real subscriber counts, views, and video metrics
