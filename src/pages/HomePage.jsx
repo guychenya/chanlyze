@@ -1,182 +1,277 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
-import FeatureCard from '../components/home/FeatureCard';
-import StatsSection from '../components/home/StatsSection';
-import TestimonialsSection from '../components/home/TestimonialsSection';
 
 const HomePage = () => {
-  const { FiPlay, FiArrowRight, FiBarChart3, FiTrendingUp, FiTarget, FiZap, FiUsers, FiAward } = FiIcons;
+  const { FiPlay, FiArrowRight, FiBarChart3, FiTrendingUp, FiTarget, FiClock, FiImage, FiEdit3, FiActivity } = FiIcons;
+  const navigate = useNavigate();
+  const [channelUrl, setChannelUrl] = useState('');
 
-  const features = [
+  const handleAnalyze = (e) => {
+    e.preventDefault();
+    if (channelUrl.trim()) {
+      navigate('/analyze', { state: { initialUrl: channelUrl } });
+    }
+  };
+
+  const testimonials = [
+    { metric: '+40% views in 2 months', name: 'Sarah Chen', role: 'Tech Reviewer', subs: '45K' },
+    { metric: 'Found 6 content gaps', name: 'Marcus Rodriguez', role: 'Gaming', subs: '78K' },
+    { metric: '+23% CTR improvement', name: 'Emma Wilson', role: 'Lifestyle', subs: '32K' }
+  ];
+
+  const valueBlocks = [
     {
       icon: FiBarChart3,
-      title: 'Comprehensive Analytics',
-      description: 'Get detailed insights into your channel performance, subscriber growth, and video metrics.',
-      color: 'from-blue-500 to-blue-600'
-    },
-    {
-      icon: FiTrendingUp,
-      title: 'Growth Tracking',
-      description: 'Monitor your channel\'s growth trends and identify opportunities for improvement.',
-      color: 'from-green-500 to-green-600'
+      title: 'Analyze',
+      description: 'Scan your last 20 videos for titles, thumbnails, and retention patterns'
     },
     {
       icon: FiTarget,
-      title: 'Content Optimization',
-      description: 'AI-powered recommendations for titles, thumbnails, and content strategy.',
-      color: 'from-purple-500 to-purple-600'
+      title: 'Compare',
+      description: 'Benchmark against similar channels to find content gaps and opportunities'
     },
     {
-      icon: FiZap,
-      title: 'Competitor Analysis',
-      description: 'Compare your performance against similar channels in your niche.',
-      color: 'from-yellow-500 to-yellow-600'
-    },
-    {
-      icon: FiUsers,
-      title: 'Audience Insights',
-      description: 'Understand your audience behavior and engagement patterns.',
-      color: 'from-pink-500 to-pink-600'
-    },
-    {
-      icon: FiAward,
-      title: 'Performance Scoring',
-      description: 'Get an overall channel health score with actionable improvement suggestions.',
-      color: 'from-indigo-500 to-indigo-600'
+      icon: FiTrendingUp,
+      title: 'Optimize',
+      description: 'Get weekly recommendations and track impact over time with AI insights'
     }
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 pt-16 pb-32">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 pt-12 pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-8"
-            >
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                Transform Your{' '}
-                <span className="gradient-text">YouTube Analytics</span>
-                <br />
-                Into Growth Strategies
-              </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                Get AI-powered insights, competitor analysis, and optimization recommendations 
-                to accelerate your YouTube channel growth. Perfect for creators with 1K-100K subscribers.
-              </p>
-            </motion.div>
-
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+              transition={{ duration: 0.5 }}
             >
-              <Link
-                to="/analyze"
-                className="bg-red-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-red-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-              >
-                <SafeIcon icon={FiPlay} className="h-5 w-5" />
-                <span>Start Free Analysis</span>
-                <SafeIcon icon={FiArrowRight} className="h-5 w-5" />
-              </Link>
-              <button className="text-gray-600 px-8 py-4 rounded-xl text-lg font-semibold hover:text-red-600 transition-colors flex items-center space-x-2">
-                <SafeIcon icon={FiPlay} className="h-5 w-5" />
-                <span>Watch Demo</span>
-              </button>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Grow your YouTube channel faster with AI:<br />
+                <span className="gradient-text">insights, optimization, and competitor gaps</span>
+              </h1>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                Pinpoint what to publish next, improve titles/thumbnails, and track growth weekly.
+                Perfect for 1K–100K creators.
+              </p>
             </motion.div>
 
-            {/* Demo Preview */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
+            {/* Inline URL Input + CTA */}
+            <motion.form
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative max-w-5xl mx-auto"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              onSubmit={handleAnalyze}
+              className="max-w-2xl mx-auto mb-3"
             >
-              <div className="bg-white rounded-2xl shadow-2xl p-2 border border-gray-200">
-                <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-8 text-center">
-                  <div className="flex items-center justify-center space-x-4 mb-4">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="text"
+                  value={channelUrl}
+                  onChange={(e) => setChannelUrl(e.target.value)}
+                  placeholder="Paste your channel link to start"
+                  className="flex-1 px-6 py-4 rounded-xl border-2 border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none text-lg"
+                />
+                <button
+                  type="submit"
+                  className="bg-red-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-red-700 transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
+                >
+                  Start Free Analysis
+                </button>
+              </div>
+              <p className="text-sm text-gray-500 mt-2">No login • 60-second scan</p>
+            </motion.form>
+
+            <motion.a
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              href="#demo"
+              className="text-red-600 hover:text-red-700 font-medium inline-flex items-center space-x-1"
+            >
+              <SafeIcon icon={FiPlay} className="h-4 w-4" />
+              <span>Watch Demo</span>
+            </motion.a>
+
+            {/* Mini Dashboard Preview */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="max-w-4xl mx-auto mt-12"
+            >
+              <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Health Score */}
+                  <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                    <div className="flex items-center justify-center mb-2">
+                      <SafeIcon icon={FiActivity} className="h-6 w-6 text-green-600" />
+                      <span className="ml-2 text-sm font-medium text-green-800">Channel Health</span>
+                    </div>
+                    <div className="text-4xl font-bold text-green-600 mb-1">82/100</div>
+                    <div className="w-full bg-green-200 rounded-full h-2">
+                      <div className="bg-green-600 h-2 rounded-full" style={{ width: '82%' }}></div>
+                    </div>
                   </div>
-                  <div className="text-gray-500 text-lg font-medium">
-                    Dashboard Preview Coming Soon
+
+                  {/* Top Opportunity */}
+                  <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                    <div className="flex items-center mb-2">
+                      <SafeIcon icon={FiClock} className="h-5 w-5 text-blue-600" />
+                      <span className="ml-2 text-sm font-semibold text-blue-800">Top Opportunity</span>
+                    </div>
+                    <p className="text-sm text-blue-900 font-medium">Post on Tue 3–5pm</p>
+                    <p className="text-xs text-blue-700 mt-1">Expected +18% CTR</p>
                   </div>
-                  <div className="mt-4 text-sm text-gray-400">
-                    Beautiful analytics visualization will be displayed here
+
+                  {/* Thumbnail CTR */}
+                  <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center">
+                        <SafeIcon icon={FiImage} className="h-5 w-5 text-purple-600" />
+                        <span className="ml-2 text-sm font-semibold text-purple-800">Thumbnail CTR</span>
+                      </div>
+                      <span className="text-lg font-bold text-purple-600">7.2%</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="flex-1 bg-purple-200 rounded-full h-2">
+                        <div className="bg-purple-600 h-2 rounded-full" style={{ width: '72%' }}></div>
+                      </div>
+                      <span className="text-xs text-purple-700">vs 5.8% niche avg</span>
+                    </div>
+                  </div>
+
+                  {/* Title Quality */}
+                  <div className="p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center">
+                        <SafeIcon icon={FiEdit3} className="h-5 w-5 text-orange-600" />
+                        <span className="ml-2 text-sm font-semibold text-orange-800">Title Quality</span>
+                      </div>
+                      <span className="text-lg font-bold text-orange-600">B+</span>
+                    </div>
+                    <p className="text-xs text-orange-700">Add numbers for +12% clicks</p>
                   </div>
                 </div>
+                <p className="text-center text-sm text-gray-600 mt-4">
+                  Generated from your last 20 uploads in under a minute
+                </p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-white">
+      {/* Social Proof */}
+      <section className="py-12 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Everything You Need to Grow
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Comprehensive tools and insights designed specifically for growing YouTube creators
-            </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+              <div className="text-3xl font-bold text-gray-900">10,000+</div>
+              <div className="text-sm text-gray-600">Channels analyzed</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-gray-900">35%</div>
+              <div className="text-sm text-gray-600">Average growth</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-gray-900">5+ hrs</div>
+              <div className="text-sm text-gray-600">Saved weekly</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-gray-900">98%</div>
+              <div className="text-sm text-gray-600">Satisfaction</div>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
+      {/* Testimonials */}
+      <section className="py-12 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
               <motion.div
-                key={feature.title}
+                key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white p-6 rounded-xl shadow-sm border border-gray-200"
               >
-                <FeatureCard {...feature} />
+                <div className="text-2xl font-bold text-red-600 mb-2">{t.metric}</div>
+                <div className="text-sm text-gray-900 font-medium">{t.name}</div>
+                <div className="text-xs text-gray-600">{t.role}, {t.subs}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <StatsSection />
+      {/* Value Blocks */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {valueBlocks.map((block, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-xl mb-4">
+                  <SafeIcon icon={block.icon} className="h-8 w-8 text-red-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{block.title}</h3>
+                <p className="text-gray-600 mb-4">{block.description}</p>
+                <button className="text-red-600 hover:text-red-700 text-sm font-medium">
+                  See an example →
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Testimonials Section */}
-      <TestimonialsSection />
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-red-600 to-red-700">
+      {/* Demo Video */}
+      <section id="demo" className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">See Chanlyze in Action</h2>
+          <p className="text-gray-600 mb-8">Watch how to get insights in 60 seconds</p>
+          <div className="bg-white rounded-2xl shadow-xl p-2">
+            <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
+              <div className="text-center">
+                <SafeIcon icon={FiPlay} className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-500">45-second demo video</p>
+                <p className="text-sm text-gray-400">Paste channel → Get score → See opportunities</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 bg-gradient-to-r from-red-600 to-red-700">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Ready to grow faster?
+          </h2>
+          <p className="text-red-100 mb-8">
+            Join 10,000+ creators optimizing their content with AI
+          </p>
+          <button
+            onClick={() => navigate('/analyze')}
+            className="bg-white text-red-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all shadow-lg inline-flex items-center space-x-2"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to Accelerate Your Growth?
-            </h2>
-            <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of creators who are already using Chanlyze to optimize their content and grow their channels.
-            </p>
-            <Link
-              to="/analyze"
-              className="bg-white text-red-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all duration-300 inline-flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              <SafeIcon icon={FiPlay} className="h-5 w-5" />
-              <span>Analyze Your Channel Now</span>
-              <SafeIcon icon={FiArrowRight} className="h-5 w-5" />
-            </Link>
-          </motion.div>
+            <span>Start Free Analysis</span>
+            <SafeIcon icon={FiArrowRight} className="h-5 w-5" />
+          </button>
+          <p className="text-red-100 text-sm mt-3">No password or credit card required</p>
         </div>
       </section>
     </div>
