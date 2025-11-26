@@ -10,6 +10,7 @@ import ApiKeySetup from '../components/analyze/ApiKeySetup';
 import QuotaMonitor from '../components/analyze/QuotaMonitor';
 import { analyzeChannel } from '../services/youtubeService';
 import { hasValidApiKey } from '../config/youtube';
+import { GradientBackground } from '../styles/theme.jsx';
 
 const AnalyzePage = () => {
   const navigate = useNavigate();
@@ -88,8 +89,9 @@ const AnalyzePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0D17] py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#0B0D17] relative overflow-hidden py-12">
+      <GradientBackground />
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,22 +125,22 @@ const AnalyzePage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white rounded-2xl shadow-xl p-8 mb-12"
+            className="bg-[#1A1D2E]/60 backdrop-blur-2xl rounded-2xl p-8 mb-12 border border-purple-500/30"
           >
             <div className="flex items-center justify-center mb-6">
-              <div className="bg-red-100 p-3 rounded-full">
-                <SafeIcon icon={FiSearch} className="h-8 w-8 text-red-600" />
+              <div className="bg-purple-900/50 p-3 rounded-full">
+                <SafeIcon icon={FiSearch} className="h-8 w-8 text-purple-400" />
               </div>
             </div>
             
-            <h2 className="text-2xl font-semibold text-gray-900 text-center mb-6">
+            <h2 className="text-2xl font-semibold text-white text-center mb-6">
               Enter YouTube Channel URL
             </h2>
             
             <ChannelUrlInput onAnalyze={handleAnalyze} />
 
-            <div className="mt-8 pt-8 border-t border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900 mb-4 text-center">
+            <div className="mt-8 pt-8 border-t border-purple-500/30">
+              <h3 className="text-lg font-medium text-white mb-4 text-center">
                 Try with popular channels:
               </h3>
               <div className="flex flex-wrap justify-center gap-2">
@@ -146,7 +148,7 @@ const AnalyzePage = () => {
                   <button
                     key={index}
                     onClick={() => handleAnalyze(url)}
-                    className="text-sm text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-2 rounded-lg transition-colors"
+                    className="text-sm text-purple-300 hover:text-purple-200 bg-purple-900/50 hover:bg-purple-800/50 px-3 py-2 rounded-lg transition-colors"
                   >
                     {url.split('@')[1] || url.split('/').pop()}
                   </button>
@@ -155,26 +157,26 @@ const AnalyzePage = () => {
             </div>
 
             {/* API Features Info */}
-            <div className="mt-8 pt-8 border-t border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900 mb-4 text-center">
+            <div className="mt-8 pt-8 border-t border-purple-500/30">
+              <h3 className="text-lg font-medium text-white mb-4 text-center">
                 Real-Time Data Analysis
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div className="bg-green-50 p-3 rounded-lg">
-                  <div className="font-medium text-green-800 mb-1">✓ Live Statistics</div>
-                  <div className="text-green-700">Real subscriber count, views, and video data</div>
+                <div className="bg-green-900/50 p-3 rounded-lg border border-green-500/30">
+                  <div className="font-medium text-green-300 mb-1">✓ Live Statistics</div>
+                  <div className="text-green-400">Real subscriber count, views, and video data</div>
                 </div>
-                <div className="bg-blue-50 p-3 rounded-lg">
-                  <div className="font-medium text-blue-800 mb-1">✓ Recent Videos</div>
-                  <div className="text-blue-700">Analysis of latest 50 videos for trends</div>
+                <div className="bg-blue-900/50 p-3 rounded-lg border border-blue-500/30">
+                  <div className="font-medium text-blue-300 mb-1">✓ Recent Videos</div>
+                  <div className="text-blue-400">Analysis of latest 50 videos for trends</div>
                 </div>
-                <div className="bg-purple-50 p-3 rounded-lg">
-                  <div className="font-medium text-purple-800 mb-1">✓ Engagement Metrics</div>
-                  <div className="text-purple-700">Likes, comments, and interaction rates</div>
+                <div className="bg-purple-900/50 p-3 rounded-lg border border-purple-500/30">
+                  <div className="font-medium text-purple-300 mb-1">✓ Engagement Metrics</div>
+                  <div className="text-purple-400">Likes, comments, and interaction rates</div>
                 </div>
-                <div className="bg-orange-50 p-3 rounded-lg">
-                  <div className="font-medium text-orange-800 mb-1">✓ Growth Analysis</div>
-                  <div className="text-orange-700">Upload frequency and performance trends</div>
+                <div className="bg-orange-900/50 p-3 rounded-lg border border-orange-500/30">
+                  <div className="font-medium text-orange-300 mb-1">✓ Growth Analysis</div>
+                  <div className="text-orange-400">Upload frequency and performance trends</div>
                 </div>
               </div>
             </div>
@@ -206,14 +208,14 @@ const AnalyzePage = () => {
                 description: 'AI-powered recommendations based on real performance data and industry best practices'
               }
             ].map((feature, index) => (
-              <div key={feature.title} className="bg-white p-6 rounded-xl shadow-lg text-center">
-                <div className="bg-gradient-to-r from-red-500 to-red-600 p-3 rounded-lg inline-flex mb-4">
+              <div key={feature.title} className="bg-[#1A1D2E]/60 p-6 rounded-xl text-center border border-purple-500/30">
+                <div className="bg-gradient-to-r from-purple-600 to-indigo-600 p-3 rounded-lg inline-flex mb-4">
                   <SafeIcon icon={feature.icon} className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-300 text-sm">
                   {feature.description}
                 </p>
               </div>
