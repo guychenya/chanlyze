@@ -29,41 +29,29 @@ const Header = () => {
             <span className="text-xl font-bold gradient-text">Chanlyze</span>
           </Link>
 
-          {/* Desktop Auth & Menu */}
+          {/* Auth & Menu */}
           <div className="flex items-center space-x-4">
             <SignedOut>
               <SignInButton mode="modal">
-                <button className="text-gray-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                  Sign In
+                <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
+                  Get Started
                 </button>
               </SignInButton>
-              <SignUpButton mode="modal">
-                <button className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
-                  Sign Up
-                </button>
-              </SignUpButton>
             </SignedOut>
             <SignedIn>
-              <Link
-                to="/analyze"
-                className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
-              >
-                Start Analysis
-              </Link>
               <UserButton afterSignOutUrl="/" />
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10"
+              >
+                <SafeIcon icon={isMenuOpen ? FiX : FiMenu} className="h-6 w-6" />
+              </button>
             </SignedIn>
-            {/* Menu button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10"
-            >
-              <SafeIcon icon={isMenuOpen ? FiX : FiMenu} className="h-6 w-6" />
-            </button>
           </div>
         </div>
       </div>
 
-      {/* Menu Dropdown */}
+      {/* Menu Dropdown - Only for logged in users */}
       {isMenuOpen && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -87,30 +75,6 @@ const Header = () => {
                 <span>{item.name}</span>
               </Link>
             ))}
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="block w-full text-gray-300 px-3 py-2 rounded-lg text-sm font-medium hover:bg-white/10 transition-colors text-center mt-4">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button className="block w-full bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors text-center">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <Link
-                to="/analyze"
-                onClick={() => setIsMenuOpen(false)}
-                className="block w-full bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors text-center mt-4"
-              >
-                Start Analysis
-              </Link>
-              <div className="flex justify-center mt-4">
-                <UserButton afterSignOutUrl="/" />
-              </div>
-            </SignedIn>
           </div>
         </motion.div>
       )}
