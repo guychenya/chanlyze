@@ -9,8 +9,8 @@ export const getUserPlan = (user) => {
 };
 
 export const getUserUsageToday = (user) => {
-  const usage = user?.publicMetadata?.usageToday || 0;
-  const lastReset = user?.publicMetadata?.lastReset;
+  const usage = user?.publicMetadata?.usageToday || user?.unsafeMetadata?.usageToday || 0;
+  const lastReset = user?.publicMetadata?.lastReset || user?.unsafeMetadata?.lastReset;
   const today = new Date().toDateString();
   
   // Reset if it's a new day
@@ -44,6 +44,7 @@ export const incrementUsage = async (user) => {
   const today = new Date().toDateString();
   
   try {
+    // Try publicMetadata first (requires backend)
     await user.update({
       publicMetadata: {
         ...user.publicMetadata,
@@ -53,7 +54,19 @@ export const incrementUsage = async (user) => {
     });
     return true;
   } catch (error) {
-    console.error('Failed to update usage:', error);
-    return false;
+    // Fallback to unsafeMetadata (client-side)
+    try {
+      await user.update({
+        unsafeMetadata: {
+          ...user.unsafeMetadata,
+          usageToday: currentUsage + 1,
+          lastReset: today
+        }
+      });
+      return true;
+    } catch (e) {
+      console.error('Failed to update usage:', e);
+      return false;
+    }
   }
 };

@@ -78,19 +78,36 @@ const SubscriptionPage = () => {
   const handleResetUsage = async () => {
     if (!user) return;
     
+    setLoading(true);
     try {
       await user.update({
-        publicMetadata: {
-          ...user.publicMetadata,
+        unsafeMetadata: {
+          ...user.unsafeMetadata,
           usageToday: 0,
           lastReset: new Date().toDateString()
         }
       });
-      toast.success('Usage counter reset successfully!');
-      window.location.reload();
+      
+      // Also update publicMetadata if possible
+      try {
+        await user.update({
+          publicMetadata: {
+            ...user.publicMetadata,
+            usageToday: 0,
+            lastReset: new Date().toDateString()
+          }
+        });
+      } catch (e) {
+        console.log('Public metadata update requires backend');
+      }
+      
+      toast.success('Usage counter reset! Refreshing...');
+      setTimeout(() => window.location.reload(), 1000);
     } catch (error) {
       console.error('Reset error:', error);
-      toast.error('Failed to reset usage counter.');
+      toast.error('Reset failed. Try signing out and back in.');
+    } finally {
+      setLoading(false);
     }
   };
 
