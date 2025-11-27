@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 import SafeIcon from '../../common/SafeIcon';
 
 const Header = () => {
@@ -45,14 +46,29 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* Auth & CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/analyze"
-              className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
-            >
-              Start Analysis
-            </Link>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="text-gray-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <button className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <Link
+                to="/analyze"
+                className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+              >
+                Start Analysis
+              </Link>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
           </div>
 
           {/* Mobile menu button */}
@@ -89,13 +105,30 @@ const Header = () => {
                 <span>{item.name}</span>
               </Link>
             ))}
-            <Link
-              to="/analyze"
-              onClick={() => setIsMenuOpen(false)}
-              className="block w-full bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors text-center mt-4"
-            >
-              Start Analysis
-            </Link>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="block w-full text-gray-300 px-3 py-2 rounded-lg text-sm font-medium hover:bg-white/10 transition-colors text-center mt-4">
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <button className="block w-full bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors text-center">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <Link
+                to="/analyze"
+                onClick={() => setIsMenuOpen(false)}
+                className="block w-full bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors text-center mt-4"
+              >
+                Start Analysis
+              </Link>
+              <div className="flex justify-center mt-4">
+                <UserButton afterSignOutUrl="/" />
+              </div>
+            </SignedIn>
           </div>
         </motion.div>
       )}
