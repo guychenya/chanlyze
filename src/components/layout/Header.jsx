@@ -52,8 +52,6 @@ const Header = () => {
               </Link>
               <UserButton afterSignOutUrl="/" />
             </SignedIn>
-          </div>
-
             {/* Menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
