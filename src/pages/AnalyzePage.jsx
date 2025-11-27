@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
 import * as FiIcons from 'react-icons/fi';
@@ -15,6 +15,7 @@ import { canUserAnalyze, getRemainingAnalyses, incrementUsage, getUserPlan } fro
 
 const AnalyzePage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useUser();
   const { FiSearch, FiPlay, FiCheckCircle, FiAlertCircle } = FiIcons;
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -22,6 +23,7 @@ const AnalyzePage = () => {
   const [hasApiKey, setHasApiKey] = useState(false);
   const [remaining, setRemaining] = useState(0);
   const [userPlan, setUserPlan] = useState('free');
+  const [autoStarted, setAutoStarted] = useState(false);
 
   useEffect(() => {
     // Check if API key is available from any source
@@ -33,6 +35,15 @@ const AnalyzePage = () => {
       setUserPlan(getUserPlan(user));
     }
   }, [user]);
+
+  // Auto-start analysis if URL passed from homepage
+  useEffect(() => {
+    const initialUrl = location.state?.initialUrl;
+    if (initialUrl && hasApiKey && user && !autoStarted && !isAnalyzing) {
+      setAutoStarted(true);
+      handleAnalyze(initialUrl);
+    }
+  }, [location.state, hasApiKey, user, autoStarted, isAnalyzing]);
 
   const analysisSteps = [
     'Fetching channel data from YouTube...',
