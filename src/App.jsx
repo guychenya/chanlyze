@@ -10,6 +10,7 @@ import AnalyzePage from './pages/AnalyzePage';
 import ResultsPage from './pages/ResultsPage';
 import ComparisonPage from './pages/ComparisonPage';
 import PrivacyPage from './pages/PrivacyPage';
+import SubscriptionPage from './pages/SubscriptionPage';
 import './App.css';
 
 function App() {
@@ -26,6 +27,19 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route
+              path="/subscription"
+              element={
+                <>
+                  <SignedIn>
+                    <SubscriptionPage />
+                  </SignedIn>
+                  <SignedOut>
+                    <RedirectToSignIn />
+                  </SignedOut>
+                </>
+              }
+            />
             <Route
               path="/analyze"
               element={

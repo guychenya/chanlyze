@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
@@ -11,18 +12,28 @@ import QuotaMonitor from '../components/analyze/QuotaMonitor';
 import { analyzeChannel } from '../services/youtubeService';
 import { hasValidApiKey } from '../config/youtube';
 import { GradientBackground } from '../styles/theme.jsx';
+import { canUserAnalyze, getRemainingAnalyses, incrementUsage, getUserPlan } from '../utils/usageTracker';
 
 const AnalyzePage = () => {
   const navigate = useNavigate();
-  const { FiSearch, FiPlay, FiCheckCircle } = FiIcons;
+  const { user } = useUser();
+  const { FiSearch, FiPlay, FiCheckCircle, FiAlertCircle } = FiIcons;
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisStep, setAnalysisStep] = useState(0);
   const [hasApiKey, setHasApiKey] = useState(false);
+  const [remaining, setRemaining] = useState(0);
+  const [userPlan, setUserPlan] = useState('free');
 
   useEffect(() => {
     // Check if API key is available from any source
     setHasApiKey(hasValidApiKey());
-  }, []);
+    
+    // Update usage stats
+    if (user) {
+      setRemaining(getRemainingAnalyses(user));
+      setUserPlan(getUserPlan(user));
+    }
+  }, [user]);
 
   const analysisSteps = [
     'Fetching channel data from YouTube...',
@@ -44,6 +55,18 @@ const AnalyzePage = () => {
       return;
     }
 
+    // Check usage limits
+    if (!canUserAnalyze(user)) {
+      toast.error(
+        <div>
+          Daily limit reached! 
+          <Link to="/subscription" className="underline ml-1">Upgrade to Pro</Link>
+        </div>,
+        { duration: 5000 }
+      );
+      return;
+    }
+
     setIsAnalyzing(true);
     setAnalysisStep(0);
 
@@ -56,6 +79,10 @@ const AnalyzePage = () => {
 
       // Perform real API analysis
       const channelData = await analyzeChannel(channelUrl);
+      
+      // Increment usage count
+      await incrementUsage(user);
+      setRemaining(getRemainingAnalyses(user));
       
       toast.success('Analysis completed successfully! Real data fetched from YouTube.');
       
@@ -110,6 +137,37 @@ const AnalyzePage = () => {
         {/* API Key Setup */}
         {!hasApiKey && (
           <ApiKeySetup onApiKeySet={handleApiKeySet} />
+        )}
+
+        {/* Usage Limit Banner */}
+        {hasApiKey && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 backdrop-blur-2xl rounded-xl p-6 border border-purple-500/30"
+          >
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center space-x-4">
+                <SafeIcon icon={FiAlertCircle} className="h-6 w-6 text-purple-400" />
+                <div>
+                  <p className="text-white font-medium">
+                    {remaining} analyses remaining today
+                  </p>
+                  <p className="text-gray-400 text-sm">
+                    {userPlan === 'free' ? 'Free Plan: 3/day' : 'Pro Plan: 20/day'}
+                  </p>
+                </div>
+              </div>
+              {userPlan === 'free' && (
+                <Link
+                  to="/subscription"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all"
+                >
+                  Upgrade to Pro
+                </Link>
+              )}
+            </div>
+          </motion.div>
         )}
 
         {/* Quota Monitor */}

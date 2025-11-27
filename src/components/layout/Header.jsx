@@ -14,6 +14,7 @@ const Header = () => {
     { name: 'Home', href: '/', icon: FiPlay },
     { name: 'Analyze', href: '/analyze', icon: FiBarChart3 },
     { name: 'Compare', href: '/compare', icon: FiTrendingUp },
+    { name: 'Pricing', href: '/subscription', icon: FiIcons.FiDollarSign },
   ];
 
   return (
