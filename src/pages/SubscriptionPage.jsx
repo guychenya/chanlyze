@@ -59,6 +59,9 @@ const SubscriptionPage = () => {
     setLoading(true);
     try {
       const priceId = import.meta.env.VITE_STRIPE_PRICE_ID_PRO;
+      if (!priceId) {
+        throw new Error('Stripe Price ID not configured');
+      }
       await createCheckoutSession(
         priceId,
         user.id,
@@ -66,9 +69,28 @@ const SubscriptionPage = () => {
       );
     } catch (error) {
       console.error('Subscription error:', error);
-      toast.error('Failed to start checkout. Please try again.');
+      toast.error(error.message || 'Failed to start checkout. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResetUsage = async () => {
+    if (!user) return;
+    
+    try {
+      await user.update({
+        publicMetadata: {
+          ...user.publicMetadata,
+          usageToday: 0,
+          lastReset: new Date().toDateString()
+        }
+      });
+      toast.success('Usage counter reset successfully!');
+      window.location.reload();
+    } catch (error) {
+      console.error('Reset error:', error);
+      toast.error('Failed to reset usage counter.');
     }
   };
 
@@ -99,7 +121,7 @@ const SubscriptionPage = () => {
             transition={{ delay: 0.1 }}
             className="max-w-md mx-auto mb-12 bg-[#1A1D2E]/60 backdrop-blur-2xl rounded-xl p-6 border border-purple-500/30"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-gray-400 text-sm">Today's Usage</p>
                 <p className="text-2xl font-bold text-white">
@@ -110,12 +132,18 @@ const SubscriptionPage = () => {
                 <SafeIcon icon={FiStar} className="h-6 w-6 text-purple-400" />
               </div>
             </div>
-            <div className="mt-4 bg-gray-800 rounded-full h-2 overflow-hidden">
+            <div className="bg-gray-800 rounded-full h-2 overflow-hidden mb-4">
               <div
                 className="bg-gradient-to-r from-purple-600 to-indigo-600 h-full transition-all duration-300"
                 style={{ width: `${(usageToday / (currentPlan === 'pro' ? 20 : 3)) * 100}%` }}
               />
             </div>
+            <button
+              onClick={handleResetUsage}
+              className="w-full text-sm text-gray-400 hover:text-white py-2 rounded-lg hover:bg-white/5 transition-colors"
+            >
+              Reset Usage Counter (Testing)
+            </button>
           </motion.div>
         )}
 
