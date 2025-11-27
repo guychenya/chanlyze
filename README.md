@@ -41,18 +41,29 @@ This application deploys automatically via GitHub → Netlify:
 
 ## ⚙️ Configuration
 
-In Netlify dashboard, add environment variable:
+- Netlify (production):
+  Add environment variables in your site settings → Build & deploy → Environment:
+  - `VITE_YOUTUBE_API_KEY=your_actual_api_key_here`
+  - `VITE_YOUTUBE_QUOTA_LIMIT=10000` (optional, only if you have increased quota)
 
-```
-VITE_YOUTUBE_API_KEY=your_actual_api_key_here
-```
+- Local development:
+  1. Copy sample environment file: `cp .env.example .env`
+  2. Edit `.env` and set your YouTube API key
+  3. Start the dev server (see commands below)
 
-For local development, create `.env` file:
+Example `.env`:
 
 ```env
 VITE_YOUTUBE_API_KEY=your_actual_api_key_here
 VITE_YOUTUBE_QUOTA_LIMIT=10000
 ```
+
+## 🧑‍💻 Local Development
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Configure environment variables (see Configuration above)
+4. Run locally: `npm run dev` (http://localhost:5173)
 
 ## 🛠️ Available Commands
 
