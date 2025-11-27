@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useUser } from '@clerk/clerk-react';
+import { useUser, SignInButton } from '@clerk/clerk-react';
+import toast from 'react-hot-toast';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
 import { GradientBackground } from '../styles/theme.jsx';
+import { createCheckoutSession } from '../services/stripeService';
 
 const SubscriptionPage = () => {
   const { user } = useUser();
   const { FiCheck, FiZap, FiStar } = FiIcons;
+  const [loading, setLoading] = useState(false);
   
   const currentPlan = user?.publicMetadata?.plan || 'free';
   const usageToday = user?.publicMetadata?.usageToday || 0;
@@ -50,10 +53,23 @@ const SubscriptionPage = () => {
     }
   ];
 
-  const handleSubscribe = (planName) => {
-    if (planName === 'free') return;
-    // TODO: Integrate payment processor (Stripe/Paddle)
-    alert('Payment integration coming soon! Contact support to upgrade.');
+  const handleSubscribe = async (planName) => {
+    if (planName === 'free' || !user) return;
+    
+    setLoading(true);
+    try {
+      const priceId = import.meta.env.VITE_STRIPE_PRICE_ID_PRO;
+      await createCheckoutSession(
+        priceId,
+        user.id,
+        user.primaryEmailAddress.emailAddress
+      );
+    } catch (error) {
+      console.error('Subscription error:', error);
+      toast.error('Failed to start checkout. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -154,19 +170,27 @@ const SubscriptionPage = () => {
                 ))}
               </ul>
 
-              <button
-                onClick={() => handleSubscribe(plan.name.toLowerCase())}
-                disabled={plan.current}
-                className={`w-full py-3 rounded-lg font-medium transition-all ${
-                  plan.current
-                    ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
-                    : plan.popular
-                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-purple-500/50'
-                    : 'bg-purple-900/50 text-purple-300 hover:bg-purple-800/50'
-                }`}
-              >
-                {plan.current ? 'Current Plan' : plan.cta}
-              </button>
+              {!user && plan.name === 'Pro' ? (
+                <SignInButton mode="modal">
+                  <button className="w-full py-3 rounded-lg font-medium transition-all bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-purple-500/50">
+                    Sign In to Upgrade
+                  </button>
+                </SignInButton>
+              ) : (
+                <button
+                  onClick={() => handleSubscribe(plan.name.toLowerCase())}
+                  disabled={plan.current || loading}
+                  className={`w-full py-3 rounded-lg font-medium transition-all ${
+                    plan.current || loading
+                      ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                      : plan.popular
+                      ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-purple-500/50'
+                      : 'bg-purple-900/50 text-purple-300 hover:bg-purple-800/50'
+                  }`}
+                >
+                  {loading ? 'Loading...' : plan.current ? 'Current Plan' : plan.cta}
+                </button>
+              )}
             </motion.div>
           ))}
         </div>

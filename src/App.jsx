@@ -27,19 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
-            <Route
-              path="/subscription"
-              element={
-                <>
-                  <SignedIn>
-                    <SubscriptionPage />
-                  </SignedIn>
-                  <SignedOut>
-                    <RedirectToSignIn />
-                  </SignedOut>
-                </>
-              }
-            />
+            <Route path="/subscription" element={<SubscriptionPage />} />
             <Route
               path="/analyze"
               element={
