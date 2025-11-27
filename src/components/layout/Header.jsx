@@ -41,9 +41,15 @@ const Header = () => {
               <div className="relative">
                 <UserButton afterSignOutUrl="/" />
                 {user?.publicMetadata?.plan === 'pro' && (
-                  <div className="absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full p-1 shadow-lg">
-                    <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  <div className="absolute -top-1.5 -right-1.5">
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2L14.5 7L20 8L16 12L17 18L12 15L7 18L8 12L4 8L9.5 7L12 2Z" fill="url(#crownGradient)" stroke="#B45309" strokeWidth="0.5"/>
+                      <defs>
+                        <linearGradient id="crownGradient" x1="12" y1="2" x2="12" y2="18">
+                          <stop offset="0%" stopColor="#FCD34D"/>
+                          <stop offset="100%" stopColor="#F59E0B"/>
+                        </linearGradient>
+                      </defs>
                     </svg>
                   </div>
                 )}
