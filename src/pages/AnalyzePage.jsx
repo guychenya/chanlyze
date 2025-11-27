@@ -8,7 +8,6 @@ import SafeIcon from '../common/SafeIcon';
 import ChannelUrlInput from '../components/analyze/ChannelUrlInput';
 import LoadingAnimation from '../components/analyze/LoadingAnimation';
 import ApiKeySetup from '../components/analyze/ApiKeySetup';
-import QuotaMonitor from '../components/analyze/QuotaMonitor';
 import { analyzeChannel } from '../services/youtubeService';
 import { hasValidApiKey } from '../config/youtube';
 import { GradientBackground } from '../styles/theme.jsx';
@@ -67,6 +66,16 @@ const AnalyzePage = () => {
       return;
     }
 
+    // Increment usage count BEFORE analysis
+    const incremented = await incrementUsage(user);
+    if (!incremented) {
+      toast.error('Failed to update usage count. Please try again.');
+      return;
+    }
+    
+    // Update remaining count immediately
+    setRemaining(getRemainingAnalyses(user));
+
     setIsAnalyzing(true);
     setAnalysisStep(0);
 
@@ -80,10 +89,6 @@ const AnalyzePage = () => {
       // Perform real API analysis
       const channelData = await analyzeChannel(channelUrl);
       
-      // Increment usage count
-      await incrementUsage(user);
-      setRemaining(getRemainingAnalyses(user));
-      
       toast.success('Analysis completed successfully! Real data fetched from YouTube.');
       
       // Navigate to results page with channel data
@@ -95,6 +100,10 @@ const AnalyzePage = () => {
     } finally {
       setIsAnalyzing(false);
       setAnalysisStep(0);
+      // Refresh remaining count
+      if (user) {
+        setRemaining(getRemainingAnalyses(user));
+      }
     }
   };
 
@@ -168,13 +177,6 @@ const AnalyzePage = () => {
               )}
             </div>
           </motion.div>
-        )}
-
-        {/* Quota Monitor */}
-        {hasApiKey && (
-          <div className="mb-6">
-            <QuotaMonitor />
-          </div>
         )}
 
         {/* Analysis Form */}
