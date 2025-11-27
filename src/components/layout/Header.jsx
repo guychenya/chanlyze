@@ -23,9 +23,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 rounded-lg">
-              <SafeIcon icon={FiPlay} className="h-6 w-6 text-white" />
-            </div>
+            <img src="/logo.svg" alt="Chanlyze" className="h-10 w-10" />
             <span className="text-xl font-bold gradient-text">Chanlyze</span>
           </Link>
 
