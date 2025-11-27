@@ -2,11 +2,12 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/clerk-react';
 import SafeIcon from '../../common/SafeIcon';
 
 const Header = () => {
   const location = useLocation();
+  const { user } = useUser();
   const { FiPlay, FiBarChart3, FiTrendingUp, FiMenu, FiX } = FiIcons;
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
