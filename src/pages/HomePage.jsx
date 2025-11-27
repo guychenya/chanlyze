@@ -58,7 +58,7 @@ const HomePage = () => {
                     { icon: FiImage, label: 'CTR', value: '7.2%', change: 'vs 5.8% avg', color: 'indigo' },
                     { icon: FiEdit3, label: 'Title', value: 'B+', change: '+12% potential', color: 'purple' }
                   ].map((item, i) => (
-                    <div key={i} className={`bg-gradient-to-br from-${item.color}-600/20 to-${item.color}-900/10 backdrop-blur-xl p-6 rounded-2xl border border-${item.color}-500/40`}>
+                    <div key={i} className={`bg-gradient-to-br from-${item.color}-600/30 to-${item.color}-900/20 backdrop-blur-xl p-6 rounded-2xl border border-${item.color}-500/50 shadow-lg`}>
                       <SafeIcon icon={item.icon} className={`h-7 w-7 text-${item.color}-400 mb-4`} />
                       <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{item.label}</div>
                       <div className="text-5xl font-bold text-white mb-1">{item.value}</div>
