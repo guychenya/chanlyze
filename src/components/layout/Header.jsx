@@ -69,7 +69,7 @@ const Header = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="bg-black/80 backdrop-blur-lg border-t border-white/10"
+          className="absolute right-4 top-16 w-64 bg-black/95 backdrop-blur-lg border border-white/10 rounded-lg shadow-xl z-50"
         >
           <div className="px-4 py-2 space-y-1">
             {navigation.map((item) => (
