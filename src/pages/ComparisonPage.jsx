@@ -1,32 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
 import ComparisonInput from '../components/comparison/ComparisonInput';
 import ComparisonResults from '../components/comparison/ComparisonResults';
 import ApiKeySetup from '../components/analyze/ApiKeySetup';
-import QuotaMonitor from '../components/analyze/QuotaMonitor';
 import { compareChannels } from '../services/youtubeService';
 import { hasValidApiKey } from '../config/youtube';
 import { GradientBackground } from '../styles/theme.jsx';
+import { canUserAnalyze, getRemainingAnalyses, incrementUsage, getUserPlan } from '../utils/usageTracker';
 
 const ComparisonPage = () => {
-  const { FiVs } = FiIcons;
+  const { user } = useUser();
+  const { FiVs, FiAlertCircle } = FiIcons;
   const [comparisonData, setComparisonData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasApiKey, setHasApiKey] = useState(false);
+  const [remaining, setRemaining] = useState(0);
+  const [userPlan, setUserPlan] = useState('free');
 
   useEffect(() => {
     // Check if API key is available from any source
     setHasApiKey(hasValidApiKey());
-  }, []);
+    
+    // Update usage stats
+    if (user) {
+      setRemaining(getRemainingAnalyses(user));
+      setUserPlan(getUserPlan(user));
+    }
+  }, [user]);
 
   const handleCompare = async (channel1Url, channel2Url) => {
     if (!hasValidApiKey()) {
       toast.error('YouTube API key is required');
       return;
     }
+
+    // Check usage limits
+    if (!canUserAnalyze(user)) {
+      toast.error(
+        <div>
+          Daily limit reached! 
+          <Link to="/subscription" className="underline ml-1">Upgrade to Pro</Link>
+        </div>,
+        { duration: 5000 }
+      );
+      return;
+    }
+
+    // Increment usage count BEFORE comparison
+    const incremented = await incrementUsage(user);
+    if (!incremented) {
+      toast.error('Failed to update usage count. Please try again.');
+      return;
+    }
+    
+    // Update remaining count immediately
+    setRemaining(getRemainingAnalyses(user));
 
     setIsLoading(true);
     try {
@@ -39,6 +72,10 @@ const ComparisonPage = () => {
       console.error('Comparison error:', error);
     } finally {
       setIsLoading(false);
+      // Refresh remaining count
+      if (user) {
+        setRemaining(getRemainingAnalyses(user));
+      }
     }
   };
 
@@ -73,26 +110,45 @@ const ComparisonPage = () => {
           </div>
         )}
 
-        {/* Quota Monitor */}
-        {hasApiKey && !comparisonData && (
-          <div className="max-w-4xl mx-auto mb-6">
-            <QuotaMonitor />
-          </div>
+        {/* Usage Limit Banner */}
+        {hasApiKey && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-4xl mx-auto mb-6 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 backdrop-blur-2xl rounded-xl p-6 border border-purple-500/30"
+          >
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center space-x-4">
+                <SafeIcon icon={FiAlertCircle} className="h-6 w-6 text-purple-400" />
+                <div>
+                  <p className="text-white font-medium">
+                    {remaining} comparisons remaining today
+                  </p>
+                  <p className="text-gray-400 text-sm">
+                    {userPlan === 'free' ? 'Free Plan: 3/day' : 'Pro Plan: 20/day'} (shared with analyses)
+                  </p>
+                </div>
+              </div>
+              {userPlan === 'free' && (
+                <Link
+                  to="/subscription"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all"
+                >
+                  Upgrade to Pro
+                </Link>
+              )}
+            </div>
+          </motion.div>
         )}
 
         {/* Comparison Interface */}
         {hasApiKey && !comparisonData ? (
           <ComparisonInput onCompare={handleCompare} isLoading={isLoading} />
         ) : hasApiKey ? (
-          <>
-            <div className="mb-6">
-              <QuotaMonitor />
-            </div>
-            <ComparisonResults 
-              data={comparisonData} 
-              onNewComparison={() => setComparisonData(null)} 
-            />
-          </>
+          <ComparisonResults 
+            data={comparisonData} 
+            onNewComparison={() => setComparisonData(null)} 
+          />
         ) : null}
 
         {/* Features for API users */}
