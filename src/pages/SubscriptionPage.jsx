@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useUser } from '@clerk/clerk-react';
+import toast from 'react-hot-toast';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
 import { GradientBackground } from '../styles/theme.jsx';
+import { createCheckoutSession, createPortalSession } from '../services/stripeService';
 
 const SubscriptionPage = () => {
   const { user } = useUser();
   const { FiCheck, FiZap, FiStar } = FiIcons;
+  const [loading, setLoading] = useState(false);
   
   const currentPlan = user?.publicMetadata?.plan || 'free';
   const usageToday = user?.publicMetadata?.usageToday || 0;
+  
+  // Stripe Price IDs - You'll need to create these in Stripe Dashboard
+  const STRIPE_PRICE_ID = import.meta.env.VITE_STRIPE_PRICE_ID_PRO || 'price_xxx';
 
   const plans = [
     {
@@ -50,10 +56,34 @@ const SubscriptionPage = () => {
     }
   ];
 
-  const handleSubscribe = (planName) => {
+  const handleSubscribe = async (planName) => {
     if (planName === 'free') return;
-    // TODO: Integrate payment processor (Stripe/Paddle)
-    alert('Payment integration coming soon! Contact support to upgrade.');
+    
+    setLoading(true);
+    try {
+      await createCheckoutSession(
+        STRIPE_PRICE_ID,
+        user.id,
+        user.primaryEmailAddress.emailAddress
+      );
+    } catch (error) {
+      console.error('Subscription error:', error);
+      toast.error('Failed to start checkout. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleManageSubscription = async () => {
+    setLoading(true);
+    try {
+      await createPortalSession(user.primaryEmailAddress.emailAddress);
+    } catch (error) {
+      console.error('Portal error:', error);
+      toast.error('Failed to open billing portal. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -156,20 +186,38 @@ const SubscriptionPage = () => {
 
               <button
                 onClick={() => handleSubscribe(plan.name.toLowerCase())}
-                disabled={plan.current}
+                disabled={plan.current || loading}
                 className={`w-full py-3 rounded-lg font-medium transition-all ${
-                  plan.current
+                  plan.current || loading
                     ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
                     : plan.popular
                     ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-purple-500/50'
                     : 'bg-purple-900/50 text-purple-300 hover:bg-purple-800/50'
                 }`}
               >
-                {plan.current ? 'Current Plan' : plan.cta}
+                {loading ? 'Loading...' : plan.current ? 'Current Plan' : plan.cta}
               </button>
             </motion.div>
           ))}
         </div>
+
+        {/* Manage Subscription */}
+        {currentPlan === 'pro' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="text-center mb-12"
+          >
+            <button
+              onClick={handleManageSubscription}
+              disabled={loading}
+              className="bg-purple-900/50 text-purple-300 px-6 py-3 rounded-lg font-medium hover:bg-purple-800/50 transition-all disabled:opacity-50"
+            >
+              Manage Subscription
+            </button>
+          </motion.div>
+        )}
 
         {/* FAQ */}
         <motion.div
