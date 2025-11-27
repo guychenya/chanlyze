@@ -52,19 +52,33 @@ const HomePage = () => {
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="max-w-6xl mx-auto mt-20">
               <div className="bg-[#1A1D2E]/60 backdrop-blur-2xl rounded-3xl p-8 border border-purple-500/30">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[
-                    { icon: FiActivity, label: 'Health', value: '82', change: '+5.2%', color: 'purple' },
-                    { icon: FiClock, label: 'Best Time', value: 'Tue 3–5pm', change: '+18% CTR', color: 'pink' },
-                    { icon: FiImage, label: 'CTR', value: '7.2%', change: 'vs 5.8% avg', color: 'indigo' },
-                    { icon: FiEdit3, label: 'Title', value: 'B+', change: '+12% potential', color: 'purple' }
-                  ].map((item, i) => (
-                    <div key={i} className={`bg-gradient-to-br from-${item.color}-600/40 to-${item.color}-800/30 backdrop-blur-xl p-6 rounded-2xl border border-${item.color}-400/60 shadow-lg`}>
-                      <SafeIcon icon={item.icon} className={`h-7 w-7 text-${item.color}-300 mb-4`} />
-                      <div className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">{item.label}</div>
-                      <div className="text-5xl font-bold text-white mb-1">{item.value}</div>
-                      <div className={`text-sm text-${item.color}-300 font-semibold`}>{item.change}</div>
-                    </div>
-                  ))}
+                  <div className="bg-gradient-to-br from-purple-600/40 to-purple-800/30 backdrop-blur-xl p-6 rounded-2xl border border-purple-400/60 shadow-lg">
+                    <SafeIcon icon={FiActivity} className="h-7 w-7 text-purple-300 mb-4" />
+                    <div className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Health</div>
+                    <div className="text-5xl font-bold text-white mb-1">82</div>
+                    <div className="text-base text-purple-300 font-semibold">+5.2%</div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-br from-pink-600/40 to-pink-800/30 backdrop-blur-xl p-6 rounded-2xl border border-pink-400/60 shadow-lg">
+                    <SafeIcon icon={FiClock} className="h-7 w-7 text-pink-300 mb-4" />
+                    <div className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Best Time</div>
+                    <div className="text-5xl font-bold text-white mb-1">Tue 3–5pm</div>
+                    <div className="text-base text-pink-300 font-semibold">+18% CTR</div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-br from-indigo-600/40 to-indigo-800/30 backdrop-blur-xl p-6 rounded-2xl border border-indigo-400/60 shadow-lg">
+                    <SafeIcon icon={FiImage} className="h-7 w-7 text-indigo-300 mb-4" />
+                    <div className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">CTR</div>
+                    <div className="text-5xl font-bold text-white mb-1">7.2%</div>
+                    <div className="text-base text-indigo-300 font-semibold">vs 5.8% avg</div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-br from-purple-600/40 to-purple-800/30 backdrop-blur-xl p-6 rounded-2xl border border-purple-400/60 shadow-lg">
+                    <SafeIcon icon={FiEdit3} className="h-7 w-7 text-purple-300 mb-4" />
+                    <div className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Title</div>
+                    <div className="text-5xl font-bold text-white mb-1">B+</div>
+                    <div className="text-base text-purple-300 font-semibold">+12% potential</div>
+                  </div>
                 </div>
               </div>
             </motion.div>
