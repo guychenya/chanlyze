@@ -2,6 +2,7 @@ import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
+import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
@@ -24,10 +25,46 @@ function App() {
         >
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/analyze" element={<AnalyzePage />} />
-            <Route path="/results/:channelId" element={<ResultsPage />} />
-            <Route path="/compare" element={<ComparisonPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route
+              path="/analyze"
+              element={
+                <>
+                  <SignedIn>
+                    <AnalyzePage />
+                  </SignedIn>
+                  <SignedOut>
+                    <RedirectToSignIn />
+                  </SignedOut>
+                </>
+              }
+            />
+            <Route
+              path="/results/:channelId"
+              element={
+                <>
+                  <SignedIn>
+                    <ResultsPage />
+                  </SignedIn>
+                  <SignedOut>
+                    <RedirectToSignIn />
+                  </SignedOut>
+                </>
+              }
+            />
+            <Route
+              path="/compare"
+              element={
+                <>
+                  <SignedIn>
+                    <ComparisonPage />
+                  </SignedIn>
+                  <SignedOut>
+                    <RedirectToSignIn />
+                  </SignedOut>
+                </>
+              }
+            />
           </Routes>
         </motion.main>
         <Footer />
