@@ -27,13 +27,13 @@ const HomePage = () => {
           <div className="text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
-                The only AI assistant<br />
+                Grow Your YouTube<br />
                 <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">
-                  you'll ever need!
+                  Channel Faster
                 </span>
               </h1>
               <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12">
-                Boost your productivity now! Ask anything, generate, enhance, review and refine content anywhere.
+                Get AI-powered insights, competitor analysis, and actionable recommendations to optimize your content and boost engagement.
               </p>
             </motion.div>
 

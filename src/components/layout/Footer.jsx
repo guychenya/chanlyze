@@ -13,9 +13,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 p-2 rounded-lg">
-                <SafeIcon icon={FiPlay} className="h-6 w-6 text-white" />
-              </div>
+              <img src="/logo.svg" alt="Chanlyze" className="h-10 w-10" />
               <span className="text-xl font-bold text-white">Chanlyze</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md leading-relaxed">
