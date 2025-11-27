@@ -38,20 +38,27 @@ const Header = () => {
               </SignInButton>
             </SignedOut>
             <SignedIn>
-              <div className="relative">
-                <UserButton afterSignOutUrl="/" />
-                {user?.publicMetadata?.plan === 'pro' && (
-                  <div className="absolute -top-1.5 -right-1.5">
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                      <path d="M12 2L14.5 7L20 8L16 12L17 18L12 15L7 18L8 12L4 8L9.5 7L12 2Z" fill="url(#crownGradient)" stroke="#B45309" strokeWidth="0.5"/>
-                      <defs>
-                        <linearGradient id="crownGradient" x1="12" y1="2" x2="12" y2="18">
-                          <stop offset="0%" stopColor="#FCD34D"/>
-                          <stop offset="100%" stopColor="#F59E0B"/>
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
+              <div className="flex flex-col items-center gap-1">
+                <div className="relative">
+                  <UserButton afterSignOutUrl="/" />
+                  {user?.publicMetadata?.plan === 'pro' && (
+                    <div className="absolute -top-1.5 -right-1.5">
+                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L14.5 7L20 8L16 12L17 18L12 15L7 18L8 12L4 8L9.5 7L12 2Z" fill="url(#crownGradient)" stroke="#B45309" strokeWidth="0.5"/>
+                        <defs>
+                          <linearGradient id="crownGradient" x1="12" y1="2" x2="12" y2="18">
+                            <stop offset="0%" stopColor="#FCD34D"/>
+                            <stop offset="100%" stopColor="#F59E0B"/>
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                {user?.publicMetadata?.plan === 'pro' ? (
+                  <span className="text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">PRO</span>
+                ) : (
+                  <span className="text-xs font-semibold text-gray-400">FREE</span>
                 )}
               </div>
               <button
