@@ -29,26 +29,8 @@ const Header = () => {
             <span className="text-xl font-bold gradient-text">Chanlyze</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  location.pathname === item.href
-                    ? 'text-white font-bold'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <SafeIcon icon={item.icon} className="h-4 w-4" />
-                <span>{item.name}</span>
-              </Link>
-            ))}
-          </nav>
-
-          {/* Auth & CTA */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop Auth & Menu */}
+          <div className="flex items-center space-x-4">
             <SignedOut>
               <SignInButton mode="modal">
                 <button className="text-gray-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
@@ -72,23 +54,24 @@ const Header = () => {
             </SignedIn>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10"
-          >
-            <SafeIcon icon={isMenuOpen ? FiX : FiMenu} className="h-6 w-6" />
-          </button>
+            {/* Menu button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10"
+            >
+              <SafeIcon icon={isMenuOpen ? FiX : FiMenu} className="h-6 w-6" />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Menu Dropdown */}
       {isMenuOpen && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="md:hidden bg-black/80 backdrop-blur-lg border-t border-white/10"
+          className="bg-black/80 backdrop-blur-lg border-t border-white/10"
         >
           <div className="px-4 py-2 space-y-1">
             {navigation.map((item) => (
